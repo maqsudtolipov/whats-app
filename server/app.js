@@ -1,7 +1,8 @@
 const express = require('express');
 const dotEnv = require('dotenv');
 const mongoose = require('mongoose');
-const User = require('./models/userModel');
+
+const userRouter = require('./routes/userRoutes');
 
 dotEnv.config({ path: './.env' });
 
@@ -12,18 +13,7 @@ mongoose
   .connect(DB)
   .then(() => console.log('☁️  Database connection successful!'));
 
-app.get('', async (req, res) => {
-  const user = await User.create({
-    name: 'maqsud',
-    email: 'maqsud@example.com',
-  });
-
-  res.json({
-    success: 'success',
-    message: 'Hello there',
-    user,
-  });
-});
+app.use('/api/users', userRouter);
 
 app.listen(process.env.PORT || 8000, () => {
   console.log(`⛵️ Listening on port ${process.env.PORT || 8000}`);
