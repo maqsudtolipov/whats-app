@@ -1,16 +1,16 @@
-import './App.scss'
-import Sidebar from "./components/Sidebar/Sidebar.jsx";
-import Chat from "./components/Chat/Chat.jsx";
-import Details from "./components/Details/Details.jsx";
+import './App.scss';
+import Sidebar from './components/Sidebar/Sidebar.jsx';
+import Chat from './components/Chat/Chat.jsx';
+import Details from './components/Details/Details.jsx';
 
 function App() {
   return (
-    <div className='app'>
+    <div className="app">
       <Sidebar />
       <Chat />
       <Details />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
