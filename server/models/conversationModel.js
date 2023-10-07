@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
 
 const conversationSchema = new mongoose.Schema({
-  users: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
-    },
-  ],
+  users: {
+    type: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
+    // Not sure if this is a good idea
+    unique: [true, 'This conversation already exists'],
+  },
 });
 
-const Conversation = mongoose.model('User', conversationSchema);
+const Conversation = mongoose.model('Conversation', conversationSchema);
 
 module.exports = Conversation;
