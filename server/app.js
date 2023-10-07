@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const userRouter = require('./routes/userRoutes');
 const conversationRouter = require('./routes/conversationRoutes');
+const directMessageRouter = require('./routes/directMessageRoutes');
 
 dotEnv.config({ path: './.env' });
 
@@ -19,6 +20,7 @@ mongoose
 
 app.use('/api/users', userRouter);
 app.use('/api/conversations', conversationRouter);
+app.use('/api/directMessage', directMessageRouter);
 
 app.listen(process.env.PORT || 8000, () => {
   console.log(`⛵️ Listening on port ${process.env.PORT || 8000}`);

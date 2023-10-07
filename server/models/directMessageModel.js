@@ -10,7 +10,10 @@ const directMessageSchema = new mongoose.Schema({
     ref: 'Conversation',
     required: [true, 'Please select a conversation'],
   },
-  createdAt: Date.now(),
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
 const DirectMessage = mongoose.model('DirectMessage', directMessageSchema);
