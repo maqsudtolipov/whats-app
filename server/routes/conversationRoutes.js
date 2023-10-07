@@ -3,6 +3,8 @@ const conversationController = require('../controllers/conversationController');
 
 const router = express.Router();
 
-router.post('/', conversationController.createConversation);
+router.route('/').post(conversationController.createConversation);
+
+router.route('/:id').get(conversationController.getConversation);
 
 module.exports = router;
