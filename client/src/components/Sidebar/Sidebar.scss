@@ -34,6 +34,10 @@
       display: flex;
       gap: 0.8rem;
 
+      &:hover {
+        outline: 1px solid #36373F;
+      }
+
       input {
         font-size: 1.4rem;
         line-height: inherit;
@@ -46,6 +50,51 @@
 
       input:focus {
         outline: none;
+      }
+    }
+  }
+
+  &__stories {
+    border-bottom: 1px solid #37393C;
+    padding: 2.4rem;
+
+    h2 {
+      margin-bottom: 1.6rem;
+    }
+
+    &-users {
+      display: flex;
+      gap: 1.6rem;
+
+      width: 100%;
+      overflow-x: scroll;
+    }
+
+    &-user {
+      border-radius: 50%;
+
+      height: 4.8rem;
+      min-width: 4.8rem;
+      margin: 4px;
+
+      &:hover {
+        outline-offset: 2px;
+        // theme color
+        outline: 2px solid #a855f7;
+        cursor: pointer;
+      }
+
+      &--icon {
+        // theme color
+        background-color: #a855f7;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          display: block;
+        }
       }
     }
   }
