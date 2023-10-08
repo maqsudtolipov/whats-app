@@ -124,6 +124,7 @@
     border-left: 2px solid transparent;
 
     &:hover {
+      // theme color
       background-image: linear-gradient(to right, rgba(168, 85, 247, .2), rgba(168, 85, 247, 0));
       border-image: linear-gradient(to right, rgba(168, 85, 247, 1), rgba(168, 85, 247, 0) 50%) 1;
       cursor: pointer;
@@ -134,6 +135,7 @@
     }
 
     &-content {
+      position: relative;
       flex: 1;
     }
 
@@ -162,6 +164,24 @@
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
+    }
+
+    &-count {
+      font-size: 1rem;
+      font-weight: 600;
+      background-color: #a855f7;
+      border-radius: 5rem;
+
+      position: absolute;
+      bottom: .8rem;
+      right: 0;
+
+      height: 1.6rem;
+      width: 1.6rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

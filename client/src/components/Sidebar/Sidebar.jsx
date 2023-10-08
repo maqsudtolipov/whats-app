@@ -83,6 +83,8 @@ const Sidebar = () => {
               Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore
             </div>
+
+            <div className="sidebar__chat-count">8</div>
           </div>
         </li>
         <li className="sidebar__chat sidebar__chat--active">
