@@ -3,13 +3,15 @@ const dotEnv = require('dotenv');
 const mongoose = require('mongoose');
 const { Server } = require('socket.io');
 
+const AppError = require('./utils/appError');
 const Conversation = require('./models/conversationModel');
 const DirectMessage = require('./models/directMessageModel');
+
+const errorController = require('./controllers/errorController');
 
 const userRouter = require('./routes/userRoutes');
 const conversationRouter = require('./routes/conversationRoutes');
 const directMessageRouter = require('./routes/directMessageRoutes');
-const { raw } = require('express');
 
 dotEnv.config({ path: './.env' });
 
@@ -26,6 +28,12 @@ mongoose
 app.use('/api/users', userRouter);
 app.use('/api/conversations', conversationRouter);
 app.use('/api/directMessage', directMessageRouter);
+
+app.all('*', (req, res, next) =>
+  next(new AppError(`Couldn't connect to ${req.originalUrl}`, 404)),
+);
+
+app.use(errorController);
 
 const server = app.listen(process.env.PORT || 8000, () => {
   console.log(`⛵️ Listening on port ${process.env.PORT || 8000}`);
