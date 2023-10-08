@@ -85,7 +85,7 @@ const Sidebar = () => {
             </div>
           </div>
         </li>
-        <li className="sidebar__chat">
+        <li className="sidebar__chat sidebar__chat--active">
           <img
             className="sidebar__chat-img"
             src="https://xsgames.co/randomusers/assets/avatars/female/1.jpg"

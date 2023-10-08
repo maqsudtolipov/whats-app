@@ -119,6 +119,19 @@
 
     display: flex;
     gap: .8rem;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent;
+
+    &:hover {
+      background-image: linear-gradient(to right, rgba(168, 85, 247, .2), rgba(168, 85, 247, 0));
+      border-image: linear-gradient(to right, rgba(168, 85, 247, 1), rgba(168, 85, 247, 0) 50%) 1;
+      cursor: pointer;
+    }
+
+    &--active {
+      background-color: #141416;
+    }
 
     &-content {
       flex: 1;
