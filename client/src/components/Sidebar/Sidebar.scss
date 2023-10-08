@@ -1,0 +1,52 @@
+.sidebar {
+  border-right: 1px solid #37393C;
+  min-height: 100vh;
+
+  &__profile {
+    padding: 1.2rem 1.6rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      border-radius: 50%;
+      height: 4rem;
+    }
+
+    &-icons {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+  }
+
+  &__search {
+    border-bottom: 1px solid #37393C;
+    padding: 1.2rem 1.6rem 2.4rem 1.6rem;
+
+    form {
+      border-radius: 3px;
+      background-color: #26272D;
+
+      padding: 0.8rem 1.2rem;
+
+      display: flex;
+      gap: 0.8rem;
+
+      input {
+        font-size: 1.4rem;
+        line-height: inherit;
+        color: inherit;
+        background-color: inherit;
+        border: 0;
+
+        width: 100%;
+      }
+
+      input:focus {
+        outline: none;
+      }
+    }
+  }
+}
