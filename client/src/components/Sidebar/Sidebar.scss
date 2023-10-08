@@ -1,6 +1,10 @@
 .sidebar {
   border-right: 1px solid #37393C;
-  min-height: 100vh;
+
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
 
   &__profile {
     padding: 1.2rem 1.6rem;
@@ -56,7 +60,7 @@
 
   &__stories {
     border-bottom: 1px solid #37393C;
-    padding: 2.4rem;
+    padding: 2.4rem 0 2.4rem 2.4rem;
 
     h2 {
       margin-bottom: 1.6rem;
@@ -64,7 +68,7 @@
 
     &-users {
       display: flex;
-      gap: 1.6rem;
+      gap: 1.2rem;
 
       width: 100%;
       overflow-x: scroll;
@@ -96,6 +100,55 @@
           display: block;
         }
       }
+    }
+  }
+
+  &__chats {
+    overflow-y: scroll;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      padding: 1.2rem 2.4rem;
+    }
+  }
+
+  &__chat {
+    padding: 1.2rem 2.4rem;
+
+    display: flex;
+    gap: .8rem;
+
+    &-content {
+      flex: 1;
+    }
+
+    &-img {
+      border-radius: 50%;
+
+      height: 4.8rem;
+      width: 4.8rem;
+    }
+
+    &-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &-time {
+      font-size: 1.2rem;
+    }
+
+    &-latest {
+      font-size: 1.4rem;
+      color: rgba(255, 255, 255, 0.60);
+
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
     }
   }
 }

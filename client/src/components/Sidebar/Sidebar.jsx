@@ -29,7 +29,7 @@ const Sidebar = () => {
 
       <div className="sidebar__stories">
         <h2>Stories</h2>
-        <div className="sidebar__stories-users">
+        <ul className="sidebar__stories-users">
           <div className="sidebar__stories-user sidebar__stories-user--icon">
             <RiAddLine />
           </div>
@@ -63,8 +63,182 @@ const Sidebar = () => {
             src="https://xsgames.co/randomusers/assets/avatars/male/43.jpg"
             alt="User avatar"
           />
-        </div>
+        </ul>
       </div>
+
+      <ul className="sidebar__chats">
+        <h2>Messages</h2>
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/male/1.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Ambrose Biernat</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/female/1.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Lanell Rhubart</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/male/2.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Rodolfo Wydick</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/female/2.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Lyndia Oseguera</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>{' '}
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/male/3.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Derrick Buzan</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/female/3.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Karleen Stepanski</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>{' '}
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/male/4.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Stanton Menzer</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/female/4.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Ashton Duhl</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>{' '}
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/male/5.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Norris Mastrovito</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>
+        <li className="sidebar__chat">
+          <img
+            className="sidebar__chat-img"
+            src="https://xsgames.co/randomusers/assets/avatars/female/5.jpg"
+            alt="User avatar"
+          />
+          <div className="sidebar__chat-content">
+            <div className="sidebar__chat-title">
+              <div className="sidebar__chat-name">Luba Pennyman</div>
+              <div className="sidebar__chat-time">16:53</div>
+            </div>
+            <div className="sidebar__chat-latest">
+              Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   );
 };
