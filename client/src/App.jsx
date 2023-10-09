@@ -4,6 +4,7 @@ import Chat from './components/Chat/Chat.jsx';
 import Details from './components/Details/Details.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/Auth/Login.jsx';
+import Signup from './components/Auth/Signup.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
