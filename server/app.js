@@ -1,6 +1,7 @@
 const express = require('express');
 const dotEnv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const { Server } = require('socket.io');
 
 const AppError = require('./utils/appError');
@@ -18,6 +19,12 @@ dotEnv.config({ path: './.env' });
 const app = express();
 
 // Middlewares
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DB_PASS);
