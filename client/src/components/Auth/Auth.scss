@@ -1,0 +1,62 @@
+.auth {
+  background: #141416;
+  background-image: url("https://images.unsplash.com/photo-1568059151110-949642101084?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2370&q=80");
+  background-size: cover;
+
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    background: #1c1d22;
+    border-radius: 3px;
+
+    padding: 2.4rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      font-size: 1.4rem;
+    }
+
+    input {
+      font-size: 1.4rem;
+      line-height: inherit;
+      color: inherit;
+      background-color: #141416;
+      border: 0;
+      border-radius: 3px;
+
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    button {
+      font-size: 1.4rem;
+      color: #fff;
+      background-color: #a855f7;
+      border: 0;
+      border-radius: 3px;
+
+      display: block;
+      padding: 0.8rem 1.2rem;
+    }
+
+    button:hover {
+      background-color: #974dde;
+    }
+  }
+}
