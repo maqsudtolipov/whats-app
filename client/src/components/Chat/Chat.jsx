@@ -1,5 +1,11 @@
 import './Chat.scss';
-import { RiMore2Line, RiSearch2Line } from 'react-icons/ri';
+import {
+  RiAttachment2,
+  RiEmotionHappyLine,
+  RiMicLine,
+  RiMore2Line,
+  RiSearch2Line,
+} from 'react-icons/ri';
 
 const Chat = () => {
   return (
@@ -19,7 +25,7 @@ const Chat = () => {
           Both with sisters first very to remodelling logbook due and attempt.
           Dropped him is the come comment a candidates, to pointing problem
           infinity, completely cheerful, help their found I payload them. Is if
-          it facilitate live the with writer's she more duckthemed together
+          it facilitate live the with writers she more duck themed together
           could still skyline.
         </div>
         <div className="message">
@@ -31,6 +37,13 @@ const Chat = () => {
         <div className="message message--you">Ok</div>
         <div className="message message--you">See you later ✌️</div>
       </section>
+
+      <form className="chat__form">
+        <RiEmotionHappyLine />
+        <RiAttachment2 />
+        <input className="chat__form-input" placeholder="👋🏻 Say hello" />
+        <RiMicLine />
+      </form>
     </div>
   );
 };
