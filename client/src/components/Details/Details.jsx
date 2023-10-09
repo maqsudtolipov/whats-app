@@ -1,5 +1,7 @@
+import './Details.scss';
+
 const Details = () => {
-  return <div>Details</div>;
+  return <div className="details">Details</div>;
 };
 
 export default Details;
