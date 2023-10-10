@@ -74,7 +74,7 @@ io.on('connection', (device) => {
     console.log(partner);
     // Fully works after connected to server, on postman not working
     cb({
-      data: conversation,
+      conversation,
       messages,
       partner,
     });

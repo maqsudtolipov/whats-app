@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedIn, logOut } from './store/thunks/user.js';
 import { socket } from './sockets/socket.js';
-import { joinConversation } from './store/reducers/wire.js';
+import { joinConversation } from './store/reducers/conversation.js';
 
 function App() {
   const user = useSelector((state) => state.user);

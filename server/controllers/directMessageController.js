@@ -5,7 +5,7 @@ exports.sendDM = catchAsync(async (req, res) => {
   const conversation = await DirectMessage.create({
     content: req.body.content,
     conversation: req.params.id,
-    sender: req.body.sender,
+    sender: req.user.id,
   });
 
   res.status(200).json({
