@@ -17,11 +17,22 @@ export const login = createAsyncThunk(
   },
 );
 
-export const isLoggedIn = createAsyncThunk('user/isLoggedIn', async () => {
-  try {
-    const res = await axios.get('/users/isLoggedIn');
+export const isLoggedIn = createAsyncThunk(
+  'user/isLoggedIn',
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get('/users/isLoggedIn');
 
-    return res.data.data;
+      return res.data.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data.message);
+    }
+  },
+);
+
+export const logOut = createAsyncThunk('user/logOut', async () => {
+  try {
+    await axios.get('/users/logOut');
   } catch (err) {
     console.log(err);
   }

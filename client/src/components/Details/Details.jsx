@@ -6,10 +6,20 @@ import {
   RiLogoutBoxLine,
   RiSettings5Line,
 } from 'react-icons/ri';
+import { logOut } from '../../store/thunks/user.js';
+import { useNavigate } from 'react-router-dom';
 
 const Details = () => {
   const user = useSelector((state) => state.user.user);
+
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const logOutHandler = async () => {
+    await dispatch(logOut());
+    await navigate(0);
+  };
 
   return (
     <div className="details">
@@ -38,7 +48,11 @@ const Details = () => {
           <span>Settings</span>
           <RiArrowRightSLine />
         </div>
-        <div className="details__link" style={{ color: '#ef4444' }}>
+        <div
+          className="details__link"
+          style={{ color: '#ef4444' }}
+          onClick={logOutHandler}
+        >
           <RiLogoutBoxLine />
           <span>Log out</span>
           {/*<RiArrowRightSLine />*/}
