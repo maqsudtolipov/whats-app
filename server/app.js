@@ -75,6 +75,7 @@ io.on('connection', (device) => {
       if (i !== 0) room.leave();
       i++;
     });
+
     device.join(conversation.id);
 
     // Fully works after connected to server, on postman not working
@@ -83,5 +84,17 @@ io.on('connection', (device) => {
       messages,
       partner,
     });
+  });
+
+  device.on('newMsgToConvo', async ({ content, userId, convoId }, cb) => {
+    console.log(content, userId, convoId);
+
+    const dm = await DirectMessage.create({
+      content,
+      conversation: convoId,
+      sender: userId,
+    });
+
+    io.to(convoId).emit('msgToRoom', dm);
   });
 });

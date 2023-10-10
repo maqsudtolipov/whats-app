@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/user.js';
-import conversationController from './reducers/conversation.js';
+import conversationReducer from './reducers/conversation.js';
+import socketReducer from './reducers/socket.js';
 
 export default configureStore({
   reducer: {
     user: userReducer,
-    conversation: conversationController,
+    conversation: conversationReducer,
+    socket: socketReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

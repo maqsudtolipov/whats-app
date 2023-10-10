@@ -8,14 +8,16 @@ export const conversationSlice = createSlice({
   },
   reducers: {
     joinConversation: (state, action) => {
-      console.log(action.payload);
       state.chat = true;
       state.data = action.payload.conversation;
       state.partner = action.payload.partner;
       state.messages = action.payload.messages;
     },
+    newMessage: (state, action) => {
+      state.messages = [...state.messages, action.payload];
+    },
   },
 });
 
-export const { joinConversation } = conversationSlice.actions;
+export const { joinConversation, newMessage } = conversationSlice.actions;
 export default conversationSlice.reducer;

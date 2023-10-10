@@ -8,12 +8,28 @@ import {
   RiSendPlane2Fill,
 } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { socket } from '../../sockets/socket.js';
 
 const Chat = () => {
   const { data, messages, partner } = useSelector(
     (state) => state.conversation,
   );
   const user = useSelector((state) => state.user.data);
+  const socketData = useSelector((state) => state.socket);
+
+  useEffect(() => {}, [socketData.connected]);
+
+  const formHandler = (e) => {
+    e.preventDefault();
+    if (!socketData.connected) return;
+
+    socket.emit('newMsgToConvo', {
+      content: e.target[0].value,
+      userId: user.id,
+      convoId: data.id,
+    });
+  };
 
   return (
     <div className="chat">
@@ -53,7 +69,7 @@ const Chat = () => {
           ))}
       </section>
 
-      <form className="chat__form">
+      <form className="chat__form" onSubmit={formHandler}>
         <RiEmotionHappyLine />
         <RiAttachment2 />
         <input className="chat__form-input" placeholder="👋🏻 Say hello" />

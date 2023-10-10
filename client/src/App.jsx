@@ -9,7 +9,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedIn, logOut } from './store/thunks/user.js';
 import { socket } from './sockets/socket.js';
-import { joinConversation } from './store/reducers/conversation.js';
+import { joinConversation, newMessage } from './store/reducers/conversation.js';
+import { connectSocket } from './store/reducers/socket.js';
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -23,8 +24,15 @@ function App() {
   useEffect(() => {
     // Only connect after user is logged
     if (user.auth) {
+      socket.connect();
+
       socket.on('connect', () => {
-        console.log('Connected');
+        console.log('📡 Connected');
+        dispatch(connectSocket());
+      });
+
+      socket.on('msgToRoom', (data) => {
+        dispatch(newMessage(data));
       });
 
       socket
@@ -33,12 +41,14 @@ function App() {
           userId: user.data.id,
         })
         .then((data) => {
+          console.log('📡 joined room');
           dispatch(joinConversation(data));
         });
     }
 
     return () => {
       socket.off('connect', () => console.log('Disconnected'));
+      socket.off('msgToRoom', () => console.log('Disconnected'));
     };
   }, [user.auth]);
 
