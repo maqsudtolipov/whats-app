@@ -2,6 +2,7 @@ const express = require('express');
 const dotEnv = require('dotenv');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const { Server } = require('socket.io');
 
 const AppError = require('./utils/appError');
@@ -26,6 +27,7 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(express.static('public'));
 

@@ -16,3 +16,13 @@ export const login = createAsyncThunk(
     }
   },
 );
+
+export const isLoggedIn = createAsyncThunk('user/isLoggedIn', async () => {
+  try {
+    const res = await axios.get('/users/isLoggedIn');
+
+    return res.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+});

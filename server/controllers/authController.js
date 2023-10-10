@@ -2,6 +2,7 @@ const catchAsync = require('./../utils/catchAsync');
 const User = require('./../models/userModel');
 const jwt = require('jsonwebtoken');
 const AppError = require('../utils/appError');
+const { promisify } = require('util');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -52,4 +53,39 @@ exports.logIn = catchAsync(async (req, res, next) => {
   }
 
   createSendToken(user, 200, req, res);
+});
+
+exports.protect = catchAsync(async (req, res, next) => {
+  const cookie = req.cookies.jwt;
+  if (cookie) {
+    // Verify token
+    const decoded = await promisify(jwt.verify)(cookie, process.env.JWT_SECRET);
+
+    // Check if user still exists
+    const user = await User.findById(decoded.id);
+    if (!user) return next(new AppError('User no longer exists', 401));
+
+    // Check if user changed password after the token was issued
+    if (user.changedPasswordAfter(decoded.iat))
+      return next(
+        new AppError(
+          'User recently changed password. Please log in again',
+          401,
+        ),
+      );
+
+    //-- GRAND ACCESS --
+    req.user = user;
+    next();
+  } else {
+    return next(new AppError('Please log in first', 401));
+  }
+});
+
+// THIS IS FOR AUTO LOG IN USER IF BROWSER HAS COOKIE
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  res.status(200).json({
+    status: 'success',
+    data: req.user,
+  });
 });
