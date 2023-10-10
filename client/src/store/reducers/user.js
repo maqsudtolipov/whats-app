@@ -5,21 +5,21 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     auth: null,
-    user: null,
+    data: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.data = action.payload;
         state.auth = true;
       })
       .addCase(isLoggedIn.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.data = action.payload;
         state.auth = true;
       })
       .addCase(isLoggedIn.rejected, (state) => {
-        state.user = false;
+        state.auth = false;
       })
       .addCase(logOut.fulfilled, (state) => {
         state.auth = false;

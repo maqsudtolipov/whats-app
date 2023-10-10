@@ -11,7 +11,7 @@ const Login = () => {
   const loginHandler = (e) => {
     e.preventDefault();
 
-    dispatch(login({ email: 'maqsud@example.com', password: 'pass1234' }));
+    dispatch(login({ email: e.target[0].value, password: e.target[1].value }));
   };
 
   return (

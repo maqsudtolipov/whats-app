@@ -10,7 +10,7 @@ import { logOut } from '../../store/thunks/user.js';
 import { useNavigate } from 'react-router-dom';
 
 const Details = () => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user.data);
 
   const dispatch = useDispatch();
 
@@ -31,7 +31,8 @@ const Details = () => {
         <>
           <div className="details__profile">
             <img
-              src="https://randomuser.me/api/portraits/men/43.jpg"
+              // src="https://randomuser.me/api/portraits/men/43.jpg"
+              src={user.img}
               alt="User avatar"
             />
             <p className="details__profile-heading">{user.name}</p>

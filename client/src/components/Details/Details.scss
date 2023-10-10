@@ -24,6 +24,9 @@
     img {
       border-radius: 50%;
 
+      // until I resize images
+      object-fit: cover;
+
       height: 12.4rem;
       width: 12.4rem;
     }

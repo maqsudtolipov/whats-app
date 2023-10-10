@@ -5,20 +5,27 @@ import {
   RiMicLine,
   RiMore2Line,
   RiSearch2Line,
+  RiSendPlane2Fill,
 } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 
 const Chat = () => {
+  const { conversation } = useSelector((state) => state.wire);
+
   return (
     <div className="chat">
-      <div className="chat__profile">
-        <img
-          src="https://xsgames.co/randomusers/assets/avatars/male/23.jpg"
-          alt="Chat group"
-        />
-        <div className="chat__profile-name">Luis Suarez</div>
-        <RiSearch2Line />
-        <RiMore2Line />
-      </div>
+      {conversation && (
+        <div className="chat__profile">
+          <img
+            // src="https://xsgames.co/randomusers/assets/avatars/male/23.jpg"
+            src={conversation.partner.img}
+            alt="Chat group"
+          />
+          <div className="chat__profile-name">{conversation.partner.name}</div>
+          <RiSearch2Line />
+          <RiMore2Line />
+        </div>
+      )}
 
       <section className="chat__section">
         <div className="message">
@@ -43,6 +50,7 @@ const Chat = () => {
         <RiAttachment2 />
         <input className="chat__form-input" placeholder="👋🏻 Say hello" />
         <RiMicLine />
+        <RiSendPlane2Fill />
       </form>
     </div>
   );

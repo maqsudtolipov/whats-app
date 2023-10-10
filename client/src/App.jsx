@@ -7,7 +7,9 @@ import Login from './components/Auth/Login.jsx';
 import Signup from './components/Auth/Signup.jsx';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLoggedIn } from './store/thunks/user.js';
+import { isLoggedIn, logOut } from './store/thunks/user.js';
+import { socket } from './sockets/socket.js';
+import { joinConversation } from './store/reducers/wire.js';
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -17,6 +19,28 @@ function App() {
   useEffect(() => {
     dispatch(isLoggedIn());
   }, []);
+
+  useEffect(() => {
+    // Only connect after user is logged
+    if (user.auth) {
+      socket.on('connect', () => {
+        console.log('Connected');
+      });
+
+      socket
+        .emitWithAck('joinConversation', {
+          cId: '65258626d1c13c1f9bb25d57',
+          userId: user.data.id,
+        })
+        .then((data) => {
+          dispatch(joinConversation(data));
+        });
+    }
+
+    return () => {
+      socket.off('connect', () => console.log('Disconnected'));
+    };
+  }, [user.auth]);
 
   return (
     <BrowserRouter>

@@ -51,21 +51,32 @@ const server = app.listen(process.env.PORT || 8000, () => {
 });
 
 // Socket.IO
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: 'http://localhost:5173',
+  },
+});
 
 io.on('connection', (device) => {
   console.log(device.id);
 
-  device.on('joinConversation', async (data, cb) => {
-    const conversation = await Conversation.findById(data.id);
+  device.on('joinConversation', async ({ cId, userId }, cb) => {
+    // Conversation
+    const conversation = await Conversation.findById(cId).populate('users');
+    // Message history
     const messages = await DirectMessage.find({
       conversation: conversation.id,
     });
+    // Conversation partner, not current user
+    const partner = conversation.users.filter((user) => user.id !== userId)[0];
 
+    console.log(userId);
+    console.log(partner);
     // Fully works after connected to server, on postman not working
-    // cb({
-    //   conversation: JSON.stringify(conversation),
-    //   messages: JSON.stringify(messages),
-    // });
+    cb({
+      data: conversation,
+      messages,
+      partner,
+    });
   });
 });
