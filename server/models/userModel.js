@@ -5,12 +5,23 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      minLength: [3, 'You name must be at least 3 characters'],
+      maxLength: [24, 'Your name must be at most 24 characters'],
       required: [true, 'Please enter your name'],
     },
     email: {
       type: String,
       required: [true, 'Please enter your email'],
       unique: true,
+    },
+    img: {
+      type: String,
+      default: 'localhost:8000/user.png',
+    },
+    bio: {
+      type: String,
+      minLength: [3, 'Please use at least 3 characters'],
+      default: '🍀 I am just awesome',
     },
     password: {
       type: String,

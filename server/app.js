@@ -27,6 +27,8 @@ app.use(
 );
 app.use(express.json());
 
+app.use(express.static('public'));
+
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DB_PASS);
 mongoose
   .connect(DB)

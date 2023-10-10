@@ -1,4 +1,70 @@
 .details {
   border-left: 1px solid #37393c;
-  padding: 2.4rem;
+
+  &__header {
+    font-weight: 600;
+    border-bottom: 1px solid #37393c;
+    padding: 2rem 2.4rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  &__profile {
+    border-bottom: 1px solid #37393c;
+
+    padding: 2.4rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+
+    img {
+      border-radius: 50%;
+
+      height: 12.4rem;
+      width: 12.4rem;
+    }
+
+    &-heading {
+      font-weight: 600;
+    }
+
+    &-text {
+      font-size: 1.4rem;
+      color: #ffffff99;
+    }
+  }
+
+  &__info {
+    border-bottom: 1px solid #37393c;
+    padding: 2.4rem;
+  }
+
+  &__section {
+    padding: 2.4rem;
+  }
+
+  &__link {
+    background-color: #26272d;
+    border-radius: 3px;
+    cursor: pointer;
+
+    margin-bottom: .8rem;
+
+    &:hover {
+      background-color: #3c3d42;
+    }
+
+    padding: 0.8rem 1.2rem;
+
+    display: flex;
+    gap: 0.8rem;
+
+    span {
+      flex: 1;
+    }
+  }
 }
