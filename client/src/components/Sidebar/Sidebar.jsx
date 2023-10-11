@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { joinConversation } from '../../store/reducers/conversation.js';
 import { socket } from '../../sockets/socket.js';
 
-const Sidebar = () => {
+const Sidebar = ({ onToggle }) => {
   const { conversations, data: user } = useSelector((state) => state.user);
   const socketData = useSelector((state) => state.socket);
 
@@ -32,7 +32,9 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar__profile">
-        {user && <img src={user.img} alt="Profile" />}
+        {user && (
+          <img src={user.img} alt="Profile" onClick={() => onToggle(true)} />
+        )}
         <div className="sidebar__profile-icons">
           <RiChatNewLine />
           <RiMore2Line />

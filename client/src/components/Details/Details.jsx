@@ -9,7 +9,7 @@ import {
 import { logOut } from '../../store/thunks/user.js';
 import { useNavigate } from 'react-router-dom';
 
-const Details = () => {
+const Details = ({ isOpen, onToggle }) => {
   const user = useSelector((state) => state.user.data);
 
   const dispatch = useDispatch();
@@ -22,9 +22,9 @@ const Details = () => {
   };
 
   return (
-    <div className="details">
+    <div className={`details ${!isOpen ? 'details--close' : ''}`}>
       <div className="details__header">
-        <RiCloseLine />
+        <RiCloseLine onClick={() => onToggle(false)} />
         <span>Profile</span>
       </div>
       {user && (

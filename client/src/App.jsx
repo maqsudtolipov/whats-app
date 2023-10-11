@@ -5,7 +5,7 @@ import Details from './components/Details/Details.jsx';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/Auth/Login.jsx';
 import Signup from './components/Auth/Signup.jsx';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedIn, logOut } from './store/thunks/user.js';
 import { socket } from './sockets/socket.js';
@@ -13,6 +13,8 @@ import { joinConversation, newMessage } from './store/reducers/conversation.js';
 import { connectSocket } from './store/reducers/socket.js';
 
 function App() {
+  const [isOpen, setIsOpen] = useState(true);
+
   const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -61,9 +63,9 @@ function App() {
             <>
               {user.auth ? (
                 <div className="app">
-                  <Sidebar />
+                  <Sidebar onToggle={setIsOpen} />
                   <Chat />
-                  <Details />
+                  <Details isOpen={isOpen} onToggle={setIsOpen} />
                 </div>
               ) : (
                 <Navigate to="/login" />
