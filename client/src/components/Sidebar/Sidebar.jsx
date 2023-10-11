@@ -5,10 +5,29 @@ import {
   RiMore2Line,
   RiSearch2Line,
 } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { joinConversation } from '../../store/reducers/conversation.js';
+import { socket } from '../../sockets/socket.js';
 
 const Sidebar = () => {
-  const partners = useSelector((state) => state.user.partners);
+  const { conversations, data } = useSelector((state) => state.user);
+  const socketData = useSelector((state) => state.socket);
+
+  const dispatch = useDispatch();
+
+  const joinConversationHandler = (id) => {
+    if (!socketData.connected) return;
+
+    socket
+      .emitWithAck('joinConversation', {
+        cId: id,
+        userId: data.id,
+      })
+      .then((data) => {
+        console.log('📡 joined room');
+        dispatch(joinConversation(data));
+      });
+  };
 
   return (
     <div className="sidebar">
@@ -71,17 +90,21 @@ const Sidebar = () => {
 
       <ul className="sidebar__chats">
         <h2>Messages</h2>
-        {partners &&
-          partners.map((partner) => (
-            <li key={partner.id} className="sidebar__chat">
+        {conversations &&
+          conversations.map((con) => (
+            <li
+              key={con.partner.id}
+              className="sidebar__chat"
+              onClick={() => joinConversationHandler(con.id)}
+            >
               <img
                 className="sidebar__chat-img"
-                src={partner.img}
+                src={con.partner.img}
                 alt="User avatar"
               />
               <div className="sidebar__chat-content">
                 <div className="sidebar__chat-title">
-                  <div className="sidebar__chat-name">{partner.name}</div>
+                  <div className="sidebar__chat-name">{con.partner.name}</div>
                   <div className="sidebar__chat-time">16:53</div>
                 </div>
                 <div className="sidebar__chat-latest">

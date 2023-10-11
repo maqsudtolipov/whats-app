@@ -70,12 +70,6 @@ io.on('connection', (device) => {
     // Conversation partner, not current user
     const partner = conversation.users.filter((user) => user.id !== userId)[0];
 
-    let i = 0;
-    device.rooms.forEach((room) => {
-      if (i !== 0) room.leave();
-      i++;
-    });
-
     device.join(conversation.id);
 
     // Fully works after connected to server, on postman not working

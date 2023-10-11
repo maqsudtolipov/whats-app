@@ -17,7 +17,7 @@ export const userSlice = createSlice({
       })
       .addCase(isLoggedIn.fulfilled, (state, action) => {
         state.data = action.payload.data;
-        state.partners = action.payload.partners;
+        state.conversations = action.payload.conversations;
         state.auth = true;
       })
       .addCase(isLoggedIn.rejected, (state) => {

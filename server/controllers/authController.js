@@ -93,14 +93,17 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       path: 'users',
     },
   });
-  const partners = user.conversations.map((con) => {
-    return con.users.filter((el) => el.id !== user.id)[0];
+  const cons = user.conversations.map((el) => {
+    return {
+      id: el.id,
+      partner: el.users.filter((el) => el.id !== user.id)[0],
+    };
   });
 
   res.status(200).json({
     status: 'success',
     data: req.user,
-    partners,
+    conversations: cons,
   });
 });
 
