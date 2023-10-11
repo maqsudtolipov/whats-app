@@ -8,8 +8,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { joinConversation } from '../../store/reducers/conversation.js';
 import { socket } from '../../sockets/socket.js';
+import axios from '../../api/axios.js';
+import { useState } from 'react';
 
 const Sidebar = ({ onToggle }) => {
+  const [users, setUsers] = useState();
+
   const { conversations, data: user } = useSelector((state) => state.user);
   const socketData = useSelector((state) => state.socket);
 
@@ -29,6 +33,13 @@ const Sidebar = ({ onToggle }) => {
       });
   };
 
+  const searchHandler = async (e) => {
+    e.preventDefault();
+
+    const res = await axios.get(`/users?name=${e.target[0].value}`);
+    setUsers(res.data.data);
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__profile">
@@ -42,10 +53,20 @@ const Sidebar = ({ onToggle }) => {
       </div>
 
       <div className="sidebar__search">
-        <form>
-          <input type="text" value="Maqsud" placeholder="Search" />
+        <form onSubmit={searchHandler}>
+          <input type="text" placeholder="Search" />
           <RiSearch2Line />
         </form>
+
+        <ul className="sidebar__search-users">
+          {users?.length >= 1 &&
+            users.map((user) => (
+              <li key={user.id} className="sidebar__search-user">
+                <img src={user.img} />
+                <span>{user.name}</span>
+              </li>
+            ))}
+        </ul>
       </div>
 
       <div className="sidebar__stories">
