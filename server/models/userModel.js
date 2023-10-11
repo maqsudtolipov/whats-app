@@ -23,6 +23,9 @@ const userSchema = new mongoose.Schema(
       minLength: [3, 'Please use at least 3 characters'],
       default: '🍀 I am just awesome',
     },
+    conversations: {
+      type: [{ type: mongoose.Schema.ObjectId, ref: 'Conversation' }],
+    },
     password: {
       type: String,
       minLength: [6, 'Your password must be at least 6 characters'],
