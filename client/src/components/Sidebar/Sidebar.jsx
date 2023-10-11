@@ -5,8 +5,11 @@ import {
   RiMore2Line,
   RiSearch2Line,
 } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
+  const partners = useSelector((state) => state.user.partners);
+
   return (
     <div className="sidebar">
       <div className="sidebar__profile">
@@ -68,6 +71,29 @@ const Sidebar = () => {
 
       <ul className="sidebar__chats">
         <h2>Messages</h2>
+        {partners &&
+          partners.map((partner) => (
+            <li key={partner.id} className="sidebar__chat">
+              <img
+                className="sidebar__chat-img"
+                src={partner.img}
+                alt="User avatar"
+              />
+              <div className="sidebar__chat-content">
+                <div className="sidebar__chat-title">
+                  <div className="sidebar__chat-name">{partner.name}</div>
+                  <div className="sidebar__chat-time">16:53</div>
+                </div>
+                <div className="sidebar__chat-latest">
+                  Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore
+                </div>
+
+                <div className="sidebar__chat-count">8</div>
+              </div>
+            </li>
+          ))}
+        <h2>Fakes</h2>
         <li className="sidebar__chat">
           <img
             className="sidebar__chat-img"

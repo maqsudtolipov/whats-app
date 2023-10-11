@@ -3,6 +3,7 @@ const User = require('./../models/userModel');
 const jwt = require('jsonwebtoken');
 const AppError = require('../utils/appError');
 const { promisify } = require('util');
+const { populate } = require('dotenv');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -46,7 +47,9 @@ exports.logIn = catchAsync(async (req, res, next) => {
     return next(new AppError('Please provide your email and password', 404));
   }
 
-  const user = await User.findOne({ email }).select('+password');
+  const user = await User.findOne({ email })
+    .select('+password')
+    .populate('conversations');
 
   if (!user || !(await user.checkPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
@@ -84,9 +87,20 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 // THIS IS FOR AUTO LOG IN USER IF BROWSER HAS COOKIE
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id).populate({
+    path: 'conversations',
+    populate: {
+      path: 'users',
+    },
+  });
+  const partners = user.conversations.map((con) => {
+    return con.users.filter((el) => el.id !== user.id)[0];
+  });
+
   res.status(200).json({
     status: 'success',
     data: req.user,
+    partners,
   });
 });
 

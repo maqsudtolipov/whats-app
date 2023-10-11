@@ -6,6 +6,7 @@ export const userSlice = createSlice({
   initialState: {
     auth: null,
     data: null,
+    conversations: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -15,7 +16,8 @@ export const userSlice = createSlice({
         state.auth = true;
       })
       .addCase(isLoggedIn.fulfilled, (state, action) => {
-        state.data = action.payload;
+        state.data = action.payload.data;
+        state.partners = action.payload.partners;
         state.auth = true;
       })
       .addCase(isLoggedIn.rejected, (state) => {
