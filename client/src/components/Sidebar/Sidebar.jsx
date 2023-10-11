@@ -40,6 +40,15 @@ const Sidebar = ({ onToggle }) => {
     setUsers(res.data.data);
   };
 
+  const createConversationHandler = async (id) => {
+    const res = await axios.post('/conversations', {
+      users: [user.id, id],
+    });
+
+    // Join conversation after it's created
+    joinConversationHandler(res.data.data.id);
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__profile">
@@ -61,7 +70,11 @@ const Sidebar = ({ onToggle }) => {
         <ul className="sidebar__search-users">
           {users?.length >= 1 &&
             users.map((user) => (
-              <li key={user.id} className="sidebar__search-user">
+              <li
+                key={user.id}
+                className="sidebar__search-user"
+                onClick={() => createConversationHandler(user.id)}
+              >
                 <img src={user.img} />
                 <span>{user.name}</span>
               </li>
