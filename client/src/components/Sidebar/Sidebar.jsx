@@ -10,6 +10,7 @@ import { joinConversation } from '../../store/reducers/conversation.js';
 import { socket } from '../../sockets/socket.js';
 import axios from '../../api/axios.js';
 import { useState } from 'react';
+import { addNewConversationToUser } from '../../store/reducers/user.js';
 
 const Sidebar = ({ onToggle }) => {
   const [users, setUsers] = useState();
@@ -47,6 +48,7 @@ const Sidebar = ({ onToggle }) => {
 
     // Join conversation after it's created
     joinConversationHandler(res.data.data.id);
+    dispatch(addNewConversationToUser(res.data.data));
   };
 
   return (

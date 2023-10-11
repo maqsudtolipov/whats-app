@@ -8,7 +8,11 @@ export const userSlice = createSlice({
     data: null,
     conversations: null,
   },
-  reducers: {},
+  reducers: {
+    addNewConversationToUser: (state, action) => {
+      state.conversations = [action.payload, ...state.conversations];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
@@ -29,4 +33,5 @@ export const userSlice = createSlice({
   },
 });
 
+export const { addNewConversationToUser } = userSlice.actions;
 export default userSlice.reducer;

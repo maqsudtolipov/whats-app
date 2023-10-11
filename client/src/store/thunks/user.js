@@ -23,7 +23,6 @@ export const isLoggedIn = createAsyncThunk(
     try {
       const res = await axios.get('/users/isLoggedIn');
 
-      console.log(res.data);
       return res.data;
     } catch (err) {
       return rejectWithValue(err.response.data.message);

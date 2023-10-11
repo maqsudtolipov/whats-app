@@ -38,16 +38,22 @@ exports.createConversation = catchAsync(async (req, res, next) => {
   });
 
   // Update both users
-  await User.findByIdAndUpdate(req.body.users[0], {
+  const user1 = await User.findByIdAndUpdate(req.body.users[0], {
     $addToSet: { conversations: conversation.id },
   });
-  await User.findByIdAndUpdate(req.body.users[1], {
+  const user2 = await User.findByIdAndUpdate(req.body.users[1], {
     $addToSet: { conversations: conversation.id },
   });
+
+  const user = [user1, user2].find((user) => user.id !== req.user.id);
+  console.log(user);
 
   res.status(200).json({
     status: 'success',
     message: 'Conversation created successfully',
-    data: conversation,
+    data: {
+      id: conversation.id,
+      partner: user,
+    },
   });
 });
