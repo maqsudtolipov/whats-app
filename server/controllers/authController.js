@@ -10,8 +10,8 @@ const signToken = (id) =>
     expiresIn: '30d',
   });
 
-const createSendToken = (user, statusCode, req, res) => {
-  const token = signToken(user.id);
+const createSendToken = (id, data, statusCode, req, res) => {
+  const token = signToken(id);
 
   const cookieOptions = {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
@@ -22,11 +22,9 @@ const createSendToken = (user, statusCode, req, res) => {
   };
   res.cookie('jwt', token, cookieOptions);
 
-  user.password = undefined;
-
   res.status(statusCode).json({
     status: 'success',
-    data: user,
+    data,
   });
 };
 
@@ -40,7 +38,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
   const user = await User.create(userData);
 
-  createSendToken(user, 201, req, res);
+  createSendToken(user.id, user, 201, req, res);
 });
 
 exports.logIn = catchAsync(async (req, res, next) => {
@@ -52,13 +50,24 @@ exports.logIn = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email })
     .select('+password')
-    .populate('conversations');
+    .populate({
+      path: 'conversations',
+      populate: {
+        path: 'users',
+      },
+    });
+  const cons = user.conversations.map((el) => {
+    return {
+      id: el.id,
+      partner: el.users.filter((el) => el.id !== user.id)[0],
+    };
+  });
 
   if (!user || !(await user.checkPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
 
-  createSendToken(user, 200, req, res);
+  createSendToken(user.id, { data: user, conversations: cons }, 200, req, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {

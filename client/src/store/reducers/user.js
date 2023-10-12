@@ -20,7 +20,8 @@ export const userSlice = createSlice({
         state.auth = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.data = action.payload;
+        state.data = action.payload.data;
+        state.conversations = action.payload.conversations;
         state.auth = true;
       })
       .addCase(isLoggedIn.fulfilled, (state, action) => {
