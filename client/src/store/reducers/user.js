@@ -12,6 +12,12 @@ export const userSlice = createSlice({
     addNewConversationToUser: (state, action) => {
       state.conversations = [action.payload, ...state.conversations];
     },
+    updateLatestMessage: (state, action) => {
+      const id = state.conversations.findIndex(
+        (con) => con.id === action.payload.id,
+      );
+      state.conversations[id].latestMessage = action.payload.latestMessage;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,5 +44,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const { addNewConversationToUser } = userSlice.actions;
+export const { addNewConversationToUser, updateLatestMessage } =
+  userSlice.actions;
 export default userSlice.reducer;

@@ -81,14 +81,27 @@ io.on('connection', (device) => {
   });
 
   device.on('newMsgToConvo', async ({ content, userId, convoId }, cb) => {
-    console.log(content, userId, convoId);
-
     const dm = await DirectMessage.create({
       content,
       conversation: convoId,
       sender: userId,
     });
+    // const cons = user.conversations.map((el) => {
+    //   return {
+    //     id: el.id,
+    //     partner: el.users.filter((el) => el.id !== user.id)[0],
+    //   };
+    // });
+    const con = await Conversation.findByIdAndUpdate(
+      convoId,
+      {
+        latestMessage: dm.content,
+      },
+      {
+        new: true,
+      },
+    );
 
-    io.to(convoId).emit('msgToRoom', dm);
+    io.to(convoId).emit('msgToRoom', dm, con);
   });
 });

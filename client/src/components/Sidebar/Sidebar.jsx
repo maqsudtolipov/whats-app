@@ -142,10 +142,11 @@ const Sidebar = ({ onToggle }) => {
                   <div className="sidebar__chat-name">{con.partner.name}</div>
                   <div className="sidebar__chat-time">16:53</div>
                 </div>
-                <div className="sidebar__chat-latest">
-                  Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore
-                </div>
+                {con.latestMessage && (
+                  <div className="sidebar__chat-latest">
+                    {con.latestMessage}
+                  </div>
+                )}
 
                 <div className="sidebar__chat-count">8</div>
               </div>

@@ -11,6 +11,7 @@ import { isLoggedIn, logOut } from './store/thunks/user.js';
 import { socket } from './sockets/socket.js';
 import { joinConversation, newMessage } from './store/reducers/conversation.js';
 import { connectSocket } from './store/reducers/socket.js';
+import { updateLatestMessage } from './store/reducers/user.js';
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
@@ -33,8 +34,9 @@ function App() {
         dispatch(connectSocket());
       });
 
-      socket.on('msgToRoom', (data) => {
+      socket.on('msgToRoom', (data, con) => {
         dispatch(newMessage(data));
+        dispatch(updateLatestMessage(con));
       });
 
       // socket

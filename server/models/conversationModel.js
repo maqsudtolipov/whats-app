@@ -27,6 +27,9 @@ const conversationSchema = new mongoose.Schema(
         message: 'Conversation should be between user1 and user2',
       },
     },
+    latestMessage: {
+      type: String,
+    },
   },
   {
     toJSON: { virtuals: true },
