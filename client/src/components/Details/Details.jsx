@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Details = ({ isOpen, onToggle }) => {
   const user = useSelector((state) => state.user.data);
+  const { partner } = useSelector((state) => state.conversation);
 
   const dispatch = useDispatch();
 
@@ -25,21 +26,21 @@ const Details = ({ isOpen, onToggle }) => {
     <div className={`details ${!isOpen ? 'details--close' : ''}`}>
       <div className="details__header">
         <RiCloseLine onClick={() => onToggle(false)} />
-        <span>Profile</span>
+        <span>Contact Info</span>
       </div>
-      {user && (
+      {partner && (
         <>
           <div className="details__profile">
             <img
               // src="https://randomuser.me/api/portraits/men/43.jpg"
-              src={user.img}
+              src={partner.img}
               alt="User avatar"
             />
-            <p className="details__profile-heading">{user.name}</p>
+            <p className="details__profile-heading">{partner.name}</p>
           </div>
           <div className="details__info">
-            <p className="details__profile-heading">Info</p>
-            <p className="details__profile-text">{user.bio}</p>
+            <p className="details__profile-heading">About Me</p>
+            <p className="details__profile-text">{partner.bio}</p>
           </div>
         </>
       )}
