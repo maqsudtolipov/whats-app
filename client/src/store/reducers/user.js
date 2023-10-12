@@ -17,6 +17,8 @@ export const userSlice = createSlice({
         (con) => con.id === action.payload.id,
       );
       state.conversations[id].latestMessage = action.payload.latestMessage;
+      state.conversations[id].latestMessageDate =
+        action.payload.latestMessageDate;
     },
   },
   extraReducers: (builder) => {
