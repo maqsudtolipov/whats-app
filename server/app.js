@@ -96,6 +96,7 @@ io.on('connection', (device) => {
       convoId,
       {
         latestMessage: dm.content,
+        latestMessageDate: Date.now(),
       },
       {
         new: true,

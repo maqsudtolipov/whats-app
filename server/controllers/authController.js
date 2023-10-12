@@ -61,6 +61,7 @@ exports.logIn = catchAsync(async (req, res, next) => {
       id: el.id,
       partner: el.users.filter((el) => el.id !== user.id)[0],
       latestMessage: el.latestMessage,
+      latestMessageDate: el.latestMessageDate,
     };
   });
 
@@ -111,6 +112,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       id: el.id,
       partner: el.users.filter((el) => el.id !== user.id)[0],
       latestMessage: el.latestMessage,
+      latestMessageDate: el.latestMessageDate,
     };
   });
 

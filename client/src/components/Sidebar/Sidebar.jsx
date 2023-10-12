@@ -51,6 +51,38 @@ const Sidebar = ({ onToggle }) => {
     dispatch(addNewConversationToUser(res.data.data));
   };
 
+  const checkDateHandler = (date) => {
+    const diff = Date.now() - new Date(date).getTime();
+
+    if (diff < 60 * 1000) {
+      return 'Now';
+    }
+
+    if (diff < 24 * 60 * 60 * 1000) {
+      const hour = new Date(date).getHours();
+      const minute = new Date(date).getMinutes();
+
+      return hour + ':' + minute;
+    }
+
+    if (diff < 7 * 24 * 60 * 60 * 1000) {
+      const weekday = [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ];
+      const day = new Date(date).getDay();
+
+      return weekday[day];
+    }
+
+    return '👀 A long time ago';
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar__profile">
@@ -140,7 +172,11 @@ const Sidebar = ({ onToggle }) => {
               <div className="sidebar__chat-content">
                 <div className="sidebar__chat-title">
                   <div className="sidebar__chat-name">{con.partner.name}</div>
-                  <div className="sidebar__chat-time">16:53</div>
+                  {con.latestMessageDate && (
+                    <div className="sidebar__chat-time">
+                      {`${checkDateHandler(con.latestMessageDate)}`}
+                    </div>
+                  )}
                 </div>
                 {con.latestMessage && (
                   <div className="sidebar__chat-latest">

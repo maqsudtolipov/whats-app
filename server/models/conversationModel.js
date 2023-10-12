@@ -30,6 +30,9 @@ const conversationSchema = new mongoose.Schema(
     latestMessage: {
       type: String,
     },
+    latestMessageDate: {
+      type: Date,
+    },
   },
   {
     toJSON: { virtuals: true },
