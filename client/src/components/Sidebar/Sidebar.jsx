@@ -29,7 +29,6 @@ const Sidebar = ({ onToggle }) => {
         userId: user.id,
       })
       .then((data) => {
-        console.log('📡 joined room');
         dispatch(joinConversation(data));
       });
   };

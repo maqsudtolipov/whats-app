@@ -43,7 +43,6 @@ app.use('/api/directMessage', directMessageRouter);
 app.all('*', (req, res, next) =>
   next(new AppError(`Couldn't connect to ${req.originalUrl}`, 404)),
 );
-
 app.use(errorController);
 
 const server = app.listen(process.env.PORT || 8000, () => {

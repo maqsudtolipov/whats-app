@@ -38,16 +38,6 @@ function App() {
         dispatch(newMessage(data));
         dispatch(updateLatestMessage(con));
       });
-
-      // socket
-      //   .emitWithAck('joinConversation', {
-      //     cId: '65258626d1c13c1f9bb25d57',
-      //     userId: user.data.id,
-      //   })
-      //   .then((data) => {
-      //     console.log('📡 joined room');
-      //     dispatch(joinConversation(data));
-      //   });
     }
 
     return () => {

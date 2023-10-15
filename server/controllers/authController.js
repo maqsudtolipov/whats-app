@@ -3,13 +3,26 @@ const User = require('./../models/userModel');
 const jwt = require('jsonwebtoken');
 const AppError = require('../utils/appError');
 const { promisify } = require('util');
-const { populate } = require('dotenv');
 
+/**
+ * Returns jwt token for the given user id
+ * @param {string} id User id
+ * @returns {string}
+ */
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '30d',
   });
 
+/**
+ * Returns jwt token for the given
+ * @param {string} id
+ * @param {object} data
+ * @param {number} statusCode
+ * @param {object} req
+ * @param {object} res
+ * @returns Sends response cookie and user data to client
+ */
 const createSendToken = (id, data, statusCode, req, res) => {
   const token = signToken(id);
 
@@ -28,7 +41,7 @@ const createSendToken = (id, data, statusCode, req, res) => {
   });
 };
 
-exports.signUp = catchAsync(async (req, res, next) => {
+exports.signUp = catchAsync(async (req, res) => {
   const userData = {
     name: req.body.name,
     email: req.body.email,
@@ -56,6 +69,11 @@ exports.logIn = catchAsync(async (req, res, next) => {
         path: 'users',
       },
     });
+
+  if (!user || !(await user.checkPassword(password, user.password))) {
+    return next(new AppError('Incorrect email or password', 401));
+  }
+
   const cons = user.conversations.map((el) => {
     return {
       id: el.id,
@@ -64,10 +82,6 @@ exports.logIn = catchAsync(async (req, res, next) => {
       latestMessageDate: el.latestMessageDate,
     };
   });
-
-  if (!user || !(await user.checkPassword(password, user.password))) {
-    return next(new AppError('Incorrect email or password', 401));
-  }
 
   createSendToken(user.id, { data: user, conversations: cons }, 200, req, res);
 });
@@ -100,13 +114,14 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 // THIS IS FOR AUTO LOG IN USER IF BROWSER HAS COOKIE
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
+exports.isLoggedIn = catchAsync(async (req, res) => {
   const user = await User.findById(req.user.id).populate({
     path: 'conversations',
     populate: {
       path: 'users',
     },
   });
+
   const cons = user.conversations.map((el) => {
     return {
       id: el.id,

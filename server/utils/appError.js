@@ -1,3 +1,7 @@
+/**
+ * @param {string} message Custom error message
+ * @param {number} statusCode Status code
+ */
 class AppError extends Error {
   constructor(message, statusCode) {
     super(message);

@@ -26,11 +26,6 @@ exports.createConversation = catchAsync(async (req, res, next) => {
   if (req.body.users[0] === req.body.users[1])
     return next(new AppError(`You can't talk with yourself`, 400));
 
-  // Prevent conversation from being created again
-  const foundConversation = await Conversation.findOne({ slug });
-  if (foundConversation)
-    return next(new AppError('This conversation already exists', 409));
-
   // Create conversation
   const conversation = await Conversation.create({
     slug,

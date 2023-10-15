@@ -1,7 +1,7 @@
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 
-exports.getUsers = catchAsync(async (req, res, next) => {
+exports.getUsers = catchAsync(async (req, res) => {
   const { name } = req.query;
   const query = {};
 
