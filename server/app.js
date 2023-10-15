@@ -14,6 +14,7 @@ const errorController = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
 const conversationRouter = require('./routes/conversationRoutes');
 const directMessageRouter = require('./routes/directMessageRoutes');
+const { findSticker } = require('./utils/stickerFinder');
 
 dotEnv.config({ path: './.env' });
 
@@ -79,18 +80,26 @@ io.on('connection', (device) => {
     });
   });
 
-  device.on('newMsgToConvo', async ({ content, userId, convoId }, cb) => {
+  device.on('newMsgToConvo', async ({ content, userId, convoId }) => {
+    let isSticker;
+    let stickerUrl;
+
+    if (content.startsWith(':')) {
+      const URL = findSticker(content);
+      const serverURL = 'http://localhost:8000';
+
+      isSticker = true;
+      stickerUrl = `${serverURL}/${URL}`;
+    }
+
     const dm = await DirectMessage.create({
       content,
       conversation: convoId,
       sender: userId,
+      isSticker,
+      stickerUrl,
     });
-    // const cons = user.conversations.map((el) => {
-    //   return {
-    //     id: el.id,
-    //     partner: el.users.filter((el) => el.id !== user.id)[0],
-    //   };
-    // });
+
     const con = await Conversation.findByIdAndUpdate(
       convoId,
       {

@@ -16,6 +16,15 @@ const directMessageSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Are you stupid??'],
     },
+    // Stickers
+    isSticker: {
+      type: Boolean,
+      default: false,
+    },
+    stickerUrl: {
+      type: String,
+      default: undefined,
+    },
     createdAt: {
       type: Date,
       default: Date.now(),
