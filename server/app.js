@@ -83,6 +83,7 @@ io.on('connection', (device) => {
   device.on('newMsgToConvo', async ({ content, userId, convoId }) => {
     let isSticker;
     let stickerUrl;
+    let msgContent = content;
 
     if (content.startsWith(':')) {
       const URL = findSticker(content);
@@ -90,10 +91,11 @@ io.on('connection', (device) => {
 
       isSticker = true;
       stickerUrl = `${serverURL}/${URL}`;
+      msgContent = 'Sticker';
     }
 
     const dm = await DirectMessage.create({
-      content,
+      content: msgContent,
       conversation: convoId,
       sender: userId,
       isSticker,
