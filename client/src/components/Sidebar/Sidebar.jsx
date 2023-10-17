@@ -203,31 +203,10 @@ const Sidebar = ({ onToggle }) => {
                       </div>
                     )}
 
-                    <div className="sidebar__chat-count">8</div>
+                    {/*<div className="sidebar__chat-count">8</div>*/}
                   </div>
                 </li>
               ))}
-            {0 > 100 && (
-              <li className="sidebar__chat">
-                <img
-                  className="sidebar__chat-img"
-                  src="https://xsgames.co/randomusers/assets/avatars/male/1.jpg"
-                  alt="User avatar"
-                />
-                <div className="sidebar__chat-content">
-                  <div className="sidebar__chat-title">
-                    <div className="sidebar__chat-name">Ambrose Biernat</div>
-                    <div className="sidebar__chat-time">16:53</div>
-                  </div>
-                  <div className="sidebar__chat-latest">
-                    Lorem ipsum dolor sit amet consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore
-                  </div>
-
-                  <div className="sidebar__chat-count">8</div>
-                </div>
-              </li>
-            )}
           </ul>
         </>
       )}
