@@ -60,7 +60,11 @@ const Chat = () => {
         {messages?.length > 0 &&
           messages.map((msg) =>
             msg.isSticker ? (
-              <div className="message message--sticker">
+              <div
+                className={`message message--sticker ${
+                  msg.sender === user.id ? 'message--you' : ''
+                }`}
+              >
                 <img src={msg.stickerUrl} alt="sticker" />
               </div>
             ) : (
@@ -73,12 +77,6 @@ const Chat = () => {
               </div>
             ),
           )}
-        <div className="message message--sticker">
-          <img src="http://localhost:8000/among-us/space.gif" />
-        </div>
-        <div className="message message--sticker">
-          <img src="http://localhost:8000/among-us/space.gif" />
-        </div>
       </section>
 
       <form className="chat__form" onSubmit={formHandler}>
