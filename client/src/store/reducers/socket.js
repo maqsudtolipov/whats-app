@@ -6,19 +6,27 @@ import { createSlice } from '@reduxjs/toolkit';
  */
 const DEMO_SOCKET = {
   connected: true,
+  socketId: '89g7f9e8r7g98er7g',
+  onlineUsers: [],
 };
 
 export const socketSlice = createSlice({
   name: 'socket',
   initialState: {
     connected: false,
+    socketId: null,
+    onlineUsers: [],
   },
   reducers: {
-    connectSocket: (state) => {
+    connectSocket: (state, action) => {
       state.connected = true;
+      state.socketId = action.payload;
+    },
+    updateOnlineUsers: (state, action) => {
+      state.onlineUsers = action.payload;
     },
   },
 });
 
-export const { connectSocket } = socketSlice.actions;
+export const { connectSocket, updateOnlineUsers } = socketSlice.actions;
 export default socketSlice.reducer;

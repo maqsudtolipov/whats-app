@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedIn, logOut } from './store/thunks/user.js';
 import { socket } from './sockets/socket.js';
 import { joinConversation, newMessage } from './store/reducers/conversation.js';
-import { connectSocket } from './store/reducers/socket.js';
+import { connectSocket, updateOnlineUsers } from './store/reducers/socket.js';
 import { updateLatestMessage } from './store/reducers/user.js';
 
 function App() {
@@ -29,14 +29,20 @@ function App() {
     if (user.auth) {
       socket.connect();
 
+      socket.emit('join', user.data.id);
+
       socket.on('connect', () => {
         console.log('📡 Connected');
-        dispatch(connectSocket());
+        dispatch(connectSocket(socket.id));
       });
 
       socket.on('msgToRoom', (data, con) => {
         dispatch(newMessage(data));
         dispatch(updateLatestMessage(con));
+      });
+
+      socket.on('updateOnlineUsers', (onlineUsers) => {
+        dispatch(updateOnlineUsers(onlineUsers));
       });
     }
 

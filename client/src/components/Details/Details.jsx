@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 const Details = ({ isOpen, onToggle }) => {
   const user = useSelector((state) => state.user.data);
   const { partner } = useSelector((state) => state.conversation);
+  const { onlineUsers } = useSelector((state) => state.socket);
 
   const dispatch = useDispatch();
 
@@ -37,6 +38,12 @@ const Details = ({ isOpen, onToggle }) => {
               alt="User avatar"
             />
             <p className="details__profile-heading">{partner.name}</p>
+
+            <span className="details__profile-online">
+              {onlineUsers?.find(
+                (onlineUser) => onlineUser.userId === partner.id,
+              ) && 'online'}
+            </span>
           </div>
           <div className="details__info">
             <p className="details__profile-heading">About Me</p>

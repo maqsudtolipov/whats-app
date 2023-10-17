@@ -25,7 +25,20 @@ const io = new Server(server, {
   },
 });
 
+let onlineUsers = [];
+
 io.on('connection', (device) => {
+  console.log('🐳 joined:', device.id);
+
+  device.on('join', (data) => {
+    onlineUsers.push({
+      userId: data,
+      socketId: device.id,
+    });
+
+    io.emit('updateOnlineUsers', onlineUsers);
+  });
+
   device.on('joinConversation', async ({ cId, userId }, cb) => {
     // Conversation
     const conversation = await Conversation.findById(cId).populate('users');
@@ -80,5 +93,12 @@ io.on('connection', (device) => {
     );
 
     io.to(convoId).emit('msgToRoom', dm, con);
+  });
+
+  device.on('disconnect', () => {
+    console.log('🍓 left:', device.id);
+    onlineUsers = onlineUsers.filter((user) => user.socketId !== device.id);
+
+    io.emit('updateOnlineUsers', onlineUsers);
   });
 });
