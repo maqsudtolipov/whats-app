@@ -8,7 +8,7 @@ import {
   RiSendPlane2Fill,
 } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { socket } from '../../sockets/socket.js';
 
 const Chat = () => {
@@ -18,7 +18,13 @@ const Chat = () => {
   const user = useSelector((state) => state.user.data);
   const socketData = useSelector((state) => state.socket);
 
+  const chatRef = useRef();
+
   useEffect(() => {}, [socketData.connected]);
+
+  useEffect(() => {
+    chatRef.current.scrollTop = chatRef.current.scrollHeight + 100;
+  }, [messages]);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -46,7 +52,7 @@ const Chat = () => {
         </div>
       )}
 
-      <section className="chat__section">
+      <section className="chat__section" ref={chatRef}>
         {/*<div className="message">*/}
         {/*  Both with sisters first very to remodelling logbook due and attempt.*/}
         {/*  Dropped him is the come comment a candidates, to pointing problem*/}
