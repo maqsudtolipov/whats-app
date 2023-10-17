@@ -2,6 +2,7 @@ import './Sidebar.scss';
 import {
   RiAddLine,
   RiChatNewLine,
+  RiCloseCircleLine,
   RiMore2Line,
   RiSearch2Line,
 } from 'react-icons/ri';
@@ -14,6 +15,7 @@ import { addNewConversationToUser } from '../../store/reducers/user.js';
 
 const Sidebar = ({ onToggle }) => {
   const [users, setUsers] = useState();
+  const [openSearch, setOpenSearch] = useState(false);
 
   const { conversations, data: user } = useSelector((state) => state.user);
   const socketData = useSelector((state) => state.socket);
@@ -35,6 +37,8 @@ const Sidebar = ({ onToggle }) => {
 
   const searchHandler = async (e) => {
     e.preventDefault();
+
+    setOpenSearch(true);
 
     const res = await axios.get(`/users?name=${e.target[0].value}`);
     setUsers(res.data.data);
@@ -97,9 +101,21 @@ const Sidebar = ({ onToggle }) => {
       <div className="sidebar__search">
         <form onSubmit={searchHandler}>
           <input type="text" placeholder="Search" />
-          <RiSearch2Line />
-        </form>
 
+          {openSearch ? (
+            <RiCloseCircleLine
+              onClick={() => {
+                setOpenSearch(false);
+                setUsers(null);
+              }}
+            />
+          ) : (
+            <RiSearch2Line />
+          )}
+        </form>
+      </div>
+
+      {openSearch && (
         <ul className="sidebar__search-users">
           {users?.length >= 1 &&
             users.map((user) => (
@@ -113,102 +129,108 @@ const Sidebar = ({ onToggle }) => {
               </li>
             ))}
         </ul>
-      </div>
+      )}
 
-      <div className="sidebar__stories">
-        <h2>Stories</h2>
-        <ul className="sidebar__stories-users">
-          <div className="sidebar__stories-user sidebar__stories-user--icon">
-            <RiAddLine />
-          </div>
-          <img
-            className="sidebar__stories-user"
-            src="https://xsgames.co/randomusers/assets/avatars/male/37.jpg"
-            alt="User avatar"
-          />
-          <img
-            className="sidebar__stories-user"
-            src="https://xsgames.co/randomusers/assets/avatars/male/12.jpg"
-            alt="User avatar"
-          />
-          <img
-            className="sidebar__stories-user"
-            src="https://xsgames.co/randomusers/assets/avatars/male/31.jpg"
-            alt="User avatar"
-          />
-          <img
-            className="sidebar__stories-user"
-            src="https://xsgames.co/randomusers/assets/avatars/male/3.jpg"
-            alt="User avatar"
-          />{' '}
-          <img
-            className="sidebar__stories-user"
-            src="https://xsgames.co/randomusers/assets/avatars/male/9.jpg"
-            alt="User avatar"
-          />{' '}
-          <img
-            className="sidebar__stories-user"
-            src="https://xsgames.co/randomusers/assets/avatars/male/43.jpg"
-            alt="User avatar"
-          />
-        </ul>
-      </div>
-
-      <ul className="sidebar__chats">
-        <h2>Messages</h2>
-        {conversations &&
-          conversations.map((con) => (
-            <li
-              key={con.partner.id}
-              className="sidebar__chat"
-              onClick={() => joinConversationHandler(con.id)}
-            >
+      {!openSearch && (
+        <>
+          <div className="sidebar__stories">
+            <h2>Stories</h2>
+            <ul className="sidebar__stories-users">
+              <div className="sidebar__stories-user sidebar__stories-user--icon">
+                <RiAddLine />
+              </div>
               <img
-                className="sidebar__chat-img"
-                src={con.partner.img}
+                className="sidebar__stories-user"
+                src="https://xsgames.co/randomusers/assets/avatars/male/37.jpg"
                 alt="User avatar"
               />
-              <div className="sidebar__chat-content">
-                <div className="sidebar__chat-title">
-                  <div className="sidebar__chat-name">{con.partner.name}</div>
-                  {con.latestMessageDate && (
-                    <div className="sidebar__chat-time">
-                      {`${checkDateHandler(con.latestMessageDate)}`}
+              <img
+                className="sidebar__stories-user"
+                src="https://xsgames.co/randomusers/assets/avatars/male/12.jpg"
+                alt="User avatar"
+              />
+              <img
+                className="sidebar__stories-user"
+                src="https://xsgames.co/randomusers/assets/avatars/male/31.jpg"
+                alt="User avatar"
+              />
+              <img
+                className="sidebar__stories-user"
+                src="https://xsgames.co/randomusers/assets/avatars/male/3.jpg"
+                alt="User avatar"
+              />{' '}
+              <img
+                className="sidebar__stories-user"
+                src="https://xsgames.co/randomusers/assets/avatars/male/9.jpg"
+                alt="User avatar"
+              />{' '}
+              <img
+                className="sidebar__stories-user"
+                src="https://xsgames.co/randomusers/assets/avatars/male/43.jpg"
+                alt="User avatar"
+              />
+            </ul>
+          </div>
+
+          <ul className="sidebar__chats">
+            <h2>Messages</h2>
+            {conversations &&
+              conversations.map((con) => (
+                <li
+                  key={con.partner.id}
+                  className="sidebar__chat"
+                  onClick={() => joinConversationHandler(con.id)}
+                >
+                  <img
+                    className="sidebar__chat-img"
+                    src={con.partner.img}
+                    alt="User avatar"
+                  />
+                  <div className="sidebar__chat-content">
+                    <div className="sidebar__chat-title">
+                      <div className="sidebar__chat-name">
+                        {con.partner.name}
+                      </div>
+                      {con.latestMessageDate && (
+                        <div className="sidebar__chat-time">
+                          {`${checkDateHandler(con.latestMessageDate)}`}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                {con.latestMessage && (
-                  <div className="sidebar__chat-latest">
-                    {con.latestMessage}
+                    {con.latestMessage && (
+                      <div className="sidebar__chat-latest">
+                        {con.latestMessage}
+                      </div>
+                    )}
+
+                    <div className="sidebar__chat-count">8</div>
                   </div>
-                )}
+                </li>
+              ))}
+            {0 > 100 && (
+              <li className="sidebar__chat">
+                <img
+                  className="sidebar__chat-img"
+                  src="https://xsgames.co/randomusers/assets/avatars/male/1.jpg"
+                  alt="User avatar"
+                />
+                <div className="sidebar__chat-content">
+                  <div className="sidebar__chat-title">
+                    <div className="sidebar__chat-name">Ambrose Biernat</div>
+                    <div className="sidebar__chat-time">16:53</div>
+                  </div>
+                  <div className="sidebar__chat-latest">
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore
+                  </div>
 
-                <div className="sidebar__chat-count">8</div>
-              </div>
-            </li>
-          ))}
-        {0 > 100 && (
-          <li className="sidebar__chat">
-            <img
-              className="sidebar__chat-img"
-              src="https://xsgames.co/randomusers/assets/avatars/male/1.jpg"
-              alt="User avatar"
-            />
-            <div className="sidebar__chat-content">
-              <div className="sidebar__chat-title">
-                <div className="sidebar__chat-name">Ambrose Biernat</div>
-                <div className="sidebar__chat-time">16:53</div>
-              </div>
-              <div className="sidebar__chat-latest">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore
-              </div>
-
-              <div className="sidebar__chat-count">8</div>
-            </div>
-          </li>
-        )}
-      </ul>
+                  <div className="sidebar__chat-count">8</div>
+                </div>
+              </li>
+            )}
+          </ul>
+        </>
+      )}
     </div>
   );
 };
