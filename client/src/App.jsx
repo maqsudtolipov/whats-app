@@ -56,7 +56,7 @@ function App() {
               {user.auth ? (
                 <div className="app">
                   <Sidebar onToggle={setIsOpen} />
-                  <Chat />
+                  <Chat onToggle={setIsOpen} />
                   <Details isOpen={isOpen} onToggle={setIsOpen} />
                 </div>
               ) : (

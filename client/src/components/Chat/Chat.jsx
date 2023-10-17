@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { socket } from '../../sockets/socket.js';
 
-const Chat = () => {
+const Chat = ({ onToggle }) => {
   const { data, messages, partner } = useSelector(
     (state) => state.conversation,
   );
@@ -48,7 +48,7 @@ const Chat = () => {
           />
           <div className="chat__profile-name">{partner.name}</div>
           <RiSearch2Line />
-          <RiMore2Line />
+          <RiMore2Line onClick={() => onToggle(true)} />
         </div>
       )}
 
