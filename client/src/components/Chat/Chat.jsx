@@ -53,16 +53,6 @@ const Chat = ({ onToggle }) => {
       )}
 
       <section className="chat__section" ref={chatRef}>
-        {/*<div className="message">*/}
-        {/*  Both with sisters first very to remodelling logbook due and attempt.*/}
-        {/*  Dropped him is the come comment a candidates, to pointing problem*/}
-        {/*  infinity, completely cheerful, help their found I payload them. Is if*/}
-        {/*  it facilitate live the with writers she more duck themed together*/}
-        {/*  could still skyline.*/}
-        {/*</div>*/}
-        {/*<div className="message message--you">See you later ✌️</div>*/}
-
-        {/* Render messages  */}
         {messages?.length > 0 &&
           messages.map((msg) =>
             msg.isSticker ? (
@@ -80,6 +70,10 @@ const Chat = ({ onToggle }) => {
                 }`}
               >
                 {msg.content}
+                <span className="message__date">
+                  {new Date(msg.createdAt).getHours()}:
+                  {new Date(msg.createdAt).getMinutes()}
+                </span>
               </div>
             ),
           )}
