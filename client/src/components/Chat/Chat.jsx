@@ -11,6 +11,15 @@ import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { socket } from '../../sockets/socket.js';
 
+const getHours = (date) => {
+  const hours = new Date(date).getHours();
+  const minutes = new Date(date).getMinutes();
+  const hoursFixed = hours >= 10 ? hours : '0' + hours;
+  const minutesFixed = minutes >= 10 ? minutes : '0' + minutes;
+
+  return `${hoursFixed}:${minutesFixed}`;
+};
+
 const Chat = ({ onToggle }) => {
   const { data, messages, partner } = useSelector(
     (state) => state.conversation,
@@ -58,8 +67,8 @@ const Chat = ({ onToggle }) => {
               </span>
             ) : (
               <span className="chat__profile-status">
-                {new Date(partner.lastSeen).getHours()}:
-                {new Date(partner.lastSeen).getMinutes()}
+                Last seen at&nbsp;
+                {getHours(partner.lastSeen)}
               </span>
             )}
           </div>
@@ -78,10 +87,7 @@ const Chat = ({ onToggle }) => {
                 }`}
               >
                 <img src={msg.stickerUrl} alt="sticker" />
-                <span className="message__date">
-                  {new Date(msg.createdAt).getHours()}:
-                  {new Date(msg.createdAt).getMinutes()}
-                </span>
+                <span className="message__date">{getHours(msg.createdAt)}</span>
               </div>
             ) : (
               <div
@@ -90,10 +96,7 @@ const Chat = ({ onToggle }) => {
                 }`}
               >
                 {msg.content}
-                <span className="message__date">
-                  {new Date(msg.createdAt).getHours()}:
-                  {new Date(msg.createdAt).getMinutes()}
-                </span>
+                <span className="message__date">{getHours(msg.createdAt)}</span>
               </div>
             ),
           )}
