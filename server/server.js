@@ -7,6 +7,7 @@ dotEnv.config({ path: './.env' });
 const app = require('./app');
 const Conversation = require('./models/conversationModel');
 const DirectMessage = require('./models/directMessageModel');
+const User = require('./models/userModel');
 const { findSticker } = require('./utils/stickerFinder');
 
 const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DB_PASS);
@@ -30,7 +31,11 @@ let onlineUsers = [];
 io.on('connection', (device) => {
   console.log('🐳 joined:', device.id);
 
-  device.on('join', (data) => {
+  device.on('join', async (data) => {
+    await User.findByIdAndUpdate(data, {
+      lastSeen: Date.now(),
+    });
+
     onlineUsers.push({
       userId: data,
       socketId: device.id,

@@ -23,6 +23,9 @@ const userSchema = new mongoose.Schema(
       minLength: [3, 'Please use at least 3 characters'],
       default: '🍀 I am just awesome',
     },
+    lastSeen: {
+      type: Date,
+    },
     conversations: {
       type: [{ type: mongoose.Schema.ObjectId, ref: 'Conversation' }],
     },

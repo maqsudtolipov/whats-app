@@ -22,9 +22,11 @@ const Chat = ({ onToggle }) => {
 
   useEffect(() => {}, [socketData.connected]);
 
-  useEffect(() => {
-    chatRef.current.scrollTop = chatRef.current.scrollHeight + 100;
-  }, [messages]);
+  // useEffect(() => {
+  //   if (messages.at(-1).sender === user?.id) {
+  //     chatRef.current.scrollTop = chatRef.current.scrollHeight;
+  //   }
+  // }, [messages]);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -46,7 +48,19 @@ const Chat = ({ onToggle }) => {
             src={partner.img}
             alt="Chat group"
           />
-          <div className="chat__profile-name">{partner.name}</div>
+          <div className="chat__profile-name">
+            <span>{partner.name} </span>
+            {socketData.onlineUsers?.find(
+              (onlineUser) => onlineUser.userId === partner.id,
+            ) ? (
+              <span>Online</span>
+            ) : (
+              <span>
+                {new Date(partner.lastSeen).getHours()}:
+                {new Date(partner.lastSeen).getMinutes()}
+              </span>
+            )}
+          </div>
           <RiSearch2Line />
           <RiMore2Line onClick={() => onToggle(true)} />
         </div>
