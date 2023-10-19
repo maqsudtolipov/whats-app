@@ -27,6 +27,17 @@
       font-weight: 600;
 
       flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-status {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    &-status--online {
+      color: deepskyblue;
     }
   }
 
@@ -105,6 +116,7 @@
 
   &__date {
     font-size: 1rem;
+    font-style: italic;
     opacity: .75;
 
     position: absolute;

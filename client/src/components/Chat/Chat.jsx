@@ -53,9 +53,11 @@ const Chat = ({ onToggle }) => {
             {socketData.onlineUsers?.find(
               (onlineUser) => onlineUser.userId === partner.id,
             ) ? (
-              <span>Online</span>
+              <span className="chat__profile-status chat__profile-status--online">
+                Online
+              </span>
             ) : (
-              <span>
+              <span className="chat__profile-status">
                 {new Date(partner.lastSeen).getHours()}:
                 {new Date(partner.lastSeen).getMinutes()}
               </span>
