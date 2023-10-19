@@ -62,6 +62,10 @@ const Chat = ({ onToggle }) => {
                 }`}
               >
                 <img src={msg.stickerUrl} alt="sticker" />
+                <span className="message__date">
+                  {new Date(msg.createdAt).getHours()}:
+                  {new Date(msg.createdAt).getMinutes()}
+                </span>
               </div>
             ) : (
               <div
