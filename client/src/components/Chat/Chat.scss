@@ -117,10 +117,11 @@
   &__date {
     font-size: 1rem;
     font-style: italic;
+    line-height: 1;
     opacity: .75;
 
     position: absolute;
-    bottom: 2px;
+    bottom: 4px;
     right: 1.6rem;
   }
 }

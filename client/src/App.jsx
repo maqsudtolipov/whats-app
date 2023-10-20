@@ -12,6 +12,7 @@ import { socket } from './sockets/socket.js';
 import { joinConversation, newMessage } from './store/reducers/conversation.js';
 import { connectSocket, updateOnlineUsers } from './store/reducers/socket.js';
 import { updateLatestMessage } from './store/reducers/user.js';
+import Nav from './components/Nav/Nav.jsx';
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
@@ -61,6 +62,7 @@ function App() {
             <>
               {user.auth ? (
                 <div className="app">
+                  <Nav />
                   <Sidebar onToggle={setIsOpen} />
                   <Chat onToggle={setIsOpen} />
                   <Details isOpen={isOpen} onToggle={setIsOpen} />

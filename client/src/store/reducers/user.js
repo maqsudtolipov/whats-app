@@ -30,7 +30,7 @@ const DEMO_USER = {
   ],
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState: {
     auth: null,
