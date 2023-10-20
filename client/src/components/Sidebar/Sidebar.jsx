@@ -88,16 +88,6 @@ const Sidebar = ({ onToggle }) => {
 
   return (
     <div className="sidebar">
-      <div className="sidebar__profile">
-        {user && (
-          <img src={user.img} alt="Profile" onClick={() => onToggle(true)} />
-        )}
-        <div className="sidebar__profile-icons">
-          <RiChatNewLine />
-          <RiMore2Line />
-        </div>
-      </div>
-
       <div className="sidebar__search">
         <form onSubmit={searchHandler}>
           <input type="text" placeholder="Search" />
@@ -173,7 +163,15 @@ const Sidebar = ({ onToggle }) => {
           </div>
 
           <ul className="sidebar__chats">
-            <h2>Messages</h2>
+            <h2
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              Messages <RiChatNewLine />
+            </h2>
             {conversations &&
               conversations.map((con) => (
                 <li
