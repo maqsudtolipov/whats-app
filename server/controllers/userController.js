@@ -14,3 +14,19 @@ exports.getUsers = catchAsync(async (req, res) => {
     data: users,
   });
 });
+
+exports.updateMe = async (req, res) => {
+  const content = {
+    name: req.body.name,
+    bio: req.body.bio,
+  };
+
+  const user = await User.findByIdAndUpdate(req.user.id, content, {
+    new: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: user,
+  });
+};

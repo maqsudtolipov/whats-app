@@ -10,6 +10,8 @@ router.post('/login', authController.logIn);
 router.get('/isLoggedIn', authController.protect, authController.isLoggedIn);
 router.get('/logOut', authController.logOut);
 
+router.patch('/updateMe', authController.protect, userController.updateMe);
+
 router.get('/', authController.protect, userController.getUsers);
 
 module.exports = router;

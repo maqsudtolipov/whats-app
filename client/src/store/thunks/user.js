@@ -55,3 +55,17 @@ export const logOut = createAsyncThunk('user/logOut', async () => {
     console.log(err);
   }
 });
+
+export const updateMe = createAsyncThunk(
+  'user/updateMe',
+  async ({ name, bio }) => {
+    try {
+      await axios.patch('/users/updateMe', {
+        name,
+        bio,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+);
