@@ -16,10 +16,10 @@ const Nav = () => {
         <img src={user.img} alt="" />
       </div>
       <div className="nav__links">
-        <Link to="/settings" className="nav__link">
+        <Link to="/" className="nav__link">
           <RiChatSmile2Line />
         </Link>
-        <Link to="/settings" className="nav__link">
+        <Link to="/" className="nav__link">
           <RiSearch2Line />
         </Link>
         <Link to="/settings" className="nav__link">

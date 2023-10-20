@@ -13,6 +13,7 @@ import { joinConversation, newMessage } from './store/reducers/conversation.js';
 import { connectSocket, updateOnlineUsers } from './store/reducers/socket.js';
 import { updateLatestMessage } from './store/reducers/user.js';
 import Nav from './components/Nav/Nav.jsx';
+import Settings from './pages/Settings.jsx';
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
@@ -66,6 +67,21 @@ function App() {
                   <Sidebar onToggle={setIsOpen} />
                   <Chat onToggle={setIsOpen} />
                   <Details isOpen={isOpen} onToggle={setIsOpen} />
+                </div>
+              ) : (
+                <Navigate to="/login" />
+              )}
+            </>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <>
+              {user.auth ? (
+                <div className="app">
+                  <Nav />
+                  <Settings />
                 </div>
               ) : (
                 <Navigate to="/login" />
