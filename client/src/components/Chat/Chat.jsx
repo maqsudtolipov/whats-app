@@ -21,7 +21,7 @@ const getHours = (date) => {
 };
 
 const Chat = ({ onToggle }) => {
-  const { data, messages, partner } = useSelector(
+  const { data, messages, partner, messagesByDate } = useSelector(
     (state) => state.conversation,
   );
   const user = useSelector((state) => state.user.data);
@@ -78,28 +78,41 @@ const Chat = ({ onToggle }) => {
       )}
 
       <section className="chat__section" ref={chatRef}>
-        {messages?.length > 0 &&
-          messages.map((msg) =>
-            msg.isSticker ? (
-              <div
-                className={`message message--sticker ${
-                  msg.sender === user.id ? 'message--you' : ''
-                }`}
-              >
-                <img src={msg.stickerUrl} alt="sticker" />
-                <span className="message__date">{getHours(msg.createdAt)}</span>
+        {messagesByDate &&
+          Object.keys(messagesByDate).map((date) => (
+            <>
+              <div className="messages__date">
+                <span>
+                  {date.split(' ')[1]} {date.split(' ')[2]}
+                </span>
               </div>
-            ) : (
-              <div
-                className={`message ${
-                  msg.sender === user.id ? 'message--you' : ''
-                }`}
-              >
-                {msg.content}
-                <span className="message__date">{getHours(msg.createdAt)}</span>
-              </div>
-            ),
-          )}
+              {messagesByDate[date].map((msg) =>
+                msg.isSticker ? (
+                  <div
+                    className={`message message--sticker ${
+                      msg.sender === user.id ? 'message--you' : ''
+                    }`}
+                  >
+                    <img src={msg.stickerUrl} alt="sticker" />
+                    <span className="message__date">
+                      {getHours(msg.createdAt)}
+                    </span>
+                  </div>
+                ) : (
+                  <div
+                    className={`message ${
+                      msg.sender === user.id ? 'message--you' : ''
+                    }`}
+                  >
+                    {msg.content}
+                    <span className="message__date">
+                      {getHours(msg.createdAt)}
+                    </span>
+                  </div>
+                ),
+              )}
+            </>
+          ))}
       </section>
 
       <form className="chat__form" onSubmit={formHandler}>

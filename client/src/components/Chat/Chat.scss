@@ -57,7 +57,7 @@
 
   &__form {
     background-color: #1c1d22;
-    border-top: 1px solid #37393C;
+    border-top: 1px solid #37393c;
 
     padding: 1.2rem 2.4rem;
 
@@ -71,12 +71,12 @@
       font-size: 1.4rem;
       line-height: inherit;
       color: inherit;
-      background-color: #26272D;
+      background-color: #26272d;
       border: 0;
       border-radius: 3px;
 
       width: 100%;
-      padding: .8rem 1.2rem;
+      padding: 0.8rem 1.2rem;
     }
 
     input:focus {
@@ -85,9 +85,22 @@
   }
 }
 
+.messages__date {
+  display: flex;
+  justify-content: center;
+
+  span {
+    font-size: 1.4rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 5rem;
+
+    padding: 0.4rem 0.8rem;
+  }
+}
+
 .message {
   font-size: 1.4rem;
-  background-color: #26272D;
+  background-color: #26272d;
   border-radius: 0 20px 20px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 
@@ -96,7 +109,7 @@
 
   min-width: 6rem;
   max-width: 75%;
-  padding: .8rem 1.2rem 1.2rem 1.2rem;
+  padding: 0.8rem 1.2rem 1.2rem 1.2rem;
   margin-left: 2.4rem;
 
   &::before {
@@ -118,7 +131,7 @@
     font-size: 1rem;
     font-style: italic;
     line-height: 1;
-    opacity: .75;
+    opacity: 0.75;
 
     position: absolute;
     bottom: 4px;

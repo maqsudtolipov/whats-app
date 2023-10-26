@@ -56,11 +56,18 @@ io.on('connection', (device) => {
 
     device.join(conversation.id);
 
+    const messagesByDate = {};
+    messages.forEach((message) => {
+      const date = message.createdAt.toDateString();
+      if (!messagesByDate[date]) messagesByDate[date] = [];
+      messagesByDate[date].push(message);
+    });
+
     // Fully works after connected to server, on postman not working
     cb({
       conversation,
-      messages,
       partner,
+      messagesByDate,
     });
   });
 

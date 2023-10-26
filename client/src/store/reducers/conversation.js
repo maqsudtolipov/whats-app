@@ -11,10 +11,15 @@ export const conversationSlice = createSlice({
       state.chat = true;
       state.data = action.payload.conversation;
       state.partner = action.payload.partner;
-      state.messages = action.payload.messages;
+      state.messagesByDate = action.payload.messagesByDate;
     },
     newMessage: (state, action) => {
-      state.messages = [...state.messages, action.payload];
+      const message = action.payload;
+      const date = new Date(message.createdAt).toDateString();
+
+      if (!state.messagesByDate[date]) state.messagesByDate[date] = [];
+
+      state.messagesByDate[date].push(message);
     },
   },
 });
