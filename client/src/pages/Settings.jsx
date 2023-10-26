@@ -2,6 +2,7 @@ import './Settings.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { updateMe } from '../store/thunks/user.js';
+import { toggleDark } from '../store/reducers/theme.js';
 
 const Settings = () => {
   const user = useSelector((state) => state.user.data);
@@ -19,6 +20,10 @@ const Settings = () => {
     dispatch(updateMe({ name, bio }));
   };
 
+  const toggleDarkHandler = () => {
+    dispatch(toggleDark());
+  };
+
   return (
     <div className="settings">
       <h2>Settings</h2>
@@ -32,6 +37,7 @@ const Settings = () => {
           </form>
           <h3>Display</h3>
           <p>Theme - dark</p>
+          <button onClick={toggleDarkHandler}>toggle</button>
           <p>Color - purple</p>
         </div>
         <h3>Preferences</h3>

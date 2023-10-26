@@ -5,3 +5,78 @@
   height: 100vh;
   overflow: hidden;
 }
+
+// Themes -- dark is default
+.light {
+  color: #000;
+  background-color: #fff;
+
+  .nav {
+    background-color: #fff;
+  }
+
+  .sidebar {
+    background-color: #fff;
+
+    &__search form {
+      background-color: #eee;
+    }
+
+    &__chat-latest {
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  .chat {
+    &__profile {
+      background-color: #fff;
+    }
+
+    &__section {
+      background-color: #eee;
+
+      .messages__date span {
+        background-color: rgba(255, 255, 255, 0.75);
+      }
+
+      .message {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(255, 255, 255, 0.25);
+      }
+
+      .message--you {
+        background-color: #a855f7;
+        color: #fff;
+      }
+
+      .message--sticker {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+
+    &__form {
+      background-color: #fff;
+
+      input {
+        background-color: #eee;
+      }
+    }
+  }
+
+  .details {
+    background-color: #fff;
+
+    &__link {
+      background-color: #eee;
+
+      &:hover {
+        background-color: #ddd;
+      }
+    }
+  }
+
+  .settings {
+    background-color: #fff;
+  }
+}

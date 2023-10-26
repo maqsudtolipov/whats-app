@@ -19,6 +19,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(true);
 
   const user = useSelector((state) => state.user);
+  const theme = useSelector((state) => state.theme);
 
   const dispatch = useDispatch();
 
@@ -62,7 +63,7 @@ function App() {
           element={
             <>
               {user.auth ? (
-                <div className="app">
+                <div className={`app ${theme.dark ? '' : 'light'}`}>
                   <Nav />
                   <Sidebar onToggle={setIsOpen} />
                   <Chat onToggle={setIsOpen} />
@@ -79,7 +80,7 @@ function App() {
           element={
             <>
               {user.auth ? (
-                <div className="app">
+                <div className={`app ${theme.dark ? '' : 'light'}`}>
                   <Nav />
                   <Settings />
                 </div>
