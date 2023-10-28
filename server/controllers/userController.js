@@ -16,13 +16,19 @@ exports.getUsers = catchAsync(async (req, res) => {
 });
 
 exports.updateMe = async (req, res) => {
-  const content = {
-    name: req.body.name,
-    bio: req.body.bio,
-  };
+  const content = {};
+
+  if (req.body.name) {
+    content.name = req.body.name;
+  }
+
+  if (req.body.bio) {
+    content.bio = req.body.bio;
+  }
 
   const user = await User.findByIdAndUpdate(req.user.id, content, {
     new: true,
+    runValidators: true,
   });
 
   res.status(200).json({
