@@ -2,10 +2,71 @@
   grid-column: 2/-1;
   margin: 0 auto;
   padding-top: 12rem;
-  width: 50vw;
+  width: 60vw;
 
   &__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 44rem 44rem;
+  }
+
+  &__part:not(:last-child) {
+    border-bottom: 1.5px solid #37393c;
+
+    padding-bottom: 1rem;
+    margin-bottom: 1.6rem;
+  }
+
+  &__account {
+    margin: 0 2rem;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.6rem;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+
+      button {
+        align-self: end;
+      }
+
+      input, textarea {
+
+        font-size: 1.4rem;
+        line-height: inherit;
+        color: inherit;
+        background-color: #26272d;
+        border: 0;
+        border-radius: 3px;
+
+        width: 100%;
+        padding: 0.8rem 1.2rem;
+
+        &:hover,
+        &:focus {
+          outline: 1px solid #36373f;
+        }
+
+
+      }
+    }
+  }
+
+  &__img {
+    border-radius: 50rem;
+    object-fit: cover;
+
+    width: 10rem;
+    height: 10rem;
+
+    // temp
+  }
+
+  &__option {
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
   }
 }

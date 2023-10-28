@@ -30,12 +30,23 @@ svg {
 
 button {
   cursor: pointer;
+  background-color: #a855f7;
+  border: 0;
+  padding: .8rem 1.6rem;
+  color: #fff;
+  border-radius: 3px;
 }
 
 // Typography
 h2 {
   font-size: 2.4rem;
   font-weight: 400;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 1.2rem;
 }
 
 //- Font sizes (px)

@@ -1,0 +1,40 @@
+.switch {
+  display: inline-block;
+  cursor: pointer;
+
+  input {
+    display: none;
+  }
+
+  input:checked ~ &__fill {
+    background-color: #a855f7;
+  }
+
+  &__fill {
+    background-color: #ddd;
+    border-radius: 5rem;
+    transition: all .2s;
+
+    position: relative;
+    width: 4rem;
+    height: 2rem;
+  }
+
+  &__fill::before {
+    content: "";
+    background-color: #1c1d22;
+    border-radius: 5rem;
+    transition: all .5s;
+
+    position: absolute;
+    top: 2px;
+    left: 2px;
+
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  input:checked ~ &__fill::before {
+    translate: 2rem;
+  }
+}

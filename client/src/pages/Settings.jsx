@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { updateMe } from '../store/thunks/user.js';
 import { toggleDark } from '../store/reducers/theme.js';
+import Switch from '../ui/Switch.jsx';
 
 const Settings = () => {
   const user = useSelector((state) => state.user.data);
@@ -28,19 +29,28 @@ const Settings = () => {
     <div className="settings">
       <h2>Settings</h2>
       <div className="settings__grid">
-        <div>
-          <h3>Account</h3>
-          <form ref={formRef} onSubmit={formHandler}>
-            <input type="text" name="name" placeholder={user.name} />
-            <input type="text" name="bio" placeholder={user.bio} />
-            <button type="submit">Update</button>
-          </form>
-          <h3>Display</h3>
-          <p>Theme - dark</p>
-          <button onClick={toggleDarkHandler}>toggle</button>
-          <p>Color - purple</p>
+        <div className="settings__section">
+          <div className="settings__part">
+            <h3>Account</h3>
+            <div className="settings__account">
+              <img className="settings__img" src={user.img} />
+              <form ref={formRef} onSubmit={formHandler}>
+                <input type="text" name="name" placeholder={user.name} />
+                <textarea name="bio" placeholder={user.bio} />
+                <button type="submit">Save</button>
+              </form>
+            </div>
+          </div>
+          <div className="settings__part">
+            <h3>Display</h3>
+            <div className="settings__option">
+              <span>Dark Mode</span>
+              <Switch onToggle={toggleDarkHandler} checked />
+            </div>
+            <p>Color - purple</p>
+          </div>
         </div>
-        <h3>Preferences</h3>
+        {/*<h3>Preferences</h3>*/}
       </div>
     </div>
   );
