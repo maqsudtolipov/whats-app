@@ -29,28 +29,33 @@ const Settings = () => {
     <div className="settings">
       <h2>Settings</h2>
       <div className="settings__grid">
-        <div className="settings__section">
-          <div className="settings__part">
-            <h3>Account</h3>
-            <div className="settings__account">
-              <img className="settings__img" src={user.img} />
-              <form ref={formRef} onSubmit={formHandler}>
-                <input type="text" name="name" placeholder={user.name} />
-                <textarea name="bio" placeholder={user.bio} />
-                <button type="submit">Save</button>
-              </form>
-            </div>
-          </div>
-          <div className="settings__part">
-            <h3>Display</h3>
-            <div className="settings__option">
-              <span>Dark Mode</span>
-              <Switch onToggle={toggleDarkHandler} checked />
-            </div>
-            <p>Color - purple</p>
+        <div className="settings__part">
+          <h3>Account</h3>
+          <div className="settings__account">
+            <img className="settings__img" src={user.img} />
+            <form ref={formRef} onSubmit={formHandler}>
+              <input type="text" name="name" placeholder={user.name} />
+              <textarea name="bio" placeholder={user.bio} />
+              <button type="submit">Save</button>
+            </form>
           </div>
         </div>
-        {/*<h3>Preferences</h3>*/}
+        <div className="settings__part">
+          <h3>Display</h3>
+          <div className="settings__option">
+            <span>Dark Mode</span>
+            <Switch onToggle={toggleDarkHandler} checked />
+          </div>
+          <div className="settings__option">
+            <span>Color</span>
+            <div className="settings__colors">
+              <div className="settings__color settings__color--purple"></div>
+              <div className="settings__color settings__color--green"></div>
+              <div className="settings__color settings__color--blue"></div>
+              <div className="settings__color settings__color--gray"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

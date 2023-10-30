@@ -2,11 +2,9 @@
   grid-column: 2/-1;
   margin: 0 auto;
   padding-top: 12rem;
-  width: 60vw;
 
   &__grid {
-    display: grid;
-    grid-template-columns: 44rem 44rem;
+    width: 50rem;
   }
 
   &__part:not(:last-child) {
@@ -68,5 +66,42 @@
     display: flex;
     align-self: center;
     justify-content: space-between;
+
+    margin: 0 2rem;
+  }
+
+  &__colors {
+    display: flex;
+    align-self: center;
+
+    display: flex;
+    gap: .6rem;
+  }
+
+  &__color {
+    border-radius: 3px;
+
+    height: 2.4rem;
+    width: 2.4rem;
+
+
+    &--purple {
+      background-color: #a855f7;
+      outline: 2px solid #ffffff;
+    }
+
+    &--green {
+      background-color: mediumseagreen;
+    }
+
+    &--blue {
+      background-color: cornflowerblue;
+    }
+
+    &--gray {
+      background-color: dimgray;
+    }
+
+
   }
 }
