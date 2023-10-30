@@ -1,6 +1,8 @@
 import './Chat.scss';
 import {
   RiAttachment2,
+  RiCheckDoubleLine,
+  RiCheckLine,
   RiEmotionHappyLine,
   RiMicLine,
   RiMore2Line,
@@ -21,7 +23,7 @@ const getHours = (date) => {
 };
 
 const Chat = ({ onToggle }) => {
-  const { data, messages, partner, messagesByDate } = useSelector(
+  const { data, partner, messagesByDate } = useSelector(
     (state) => state.conversation,
   );
   const user = useSelector((state) => state.user.data);
@@ -29,13 +31,23 @@ const Chat = ({ onToggle }) => {
 
   const chatRef = useRef();
 
-  useEffect(() => {}, [socketData.connected]);
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          socket.emit('messageDelivered', {
+            messageId: entry.target.id,
+          });
+        }
+      });
+    });
 
-  // useEffect(() => {
-  //   if (messages.at(-1).sender === user?.id) {
-  //     chatRef.current.scrollTop = chatRef.current.scrollHeight;
-  //   }
-  // }, [messages]);
+    const messages = chatRef.current.querySelectorAll(
+      '.message:not(.message--you)[data-seen="false"]',
+    );
+    if (messages.length >= 1)
+      messages.forEach((msgEl) => observer.observe(msgEl));
+  }, [messagesByDate]);
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -89,6 +101,8 @@ const Chat = ({ onToggle }) => {
               {messagesByDate[date].map((msg) =>
                 msg.isSticker ? (
                   <div
+                    key={msg.id}
+                    id={msg.id}
                     className={`message message--sticker ${
                       msg.sender === user.id ? 'message--you' : ''
                     }`}
@@ -100,13 +114,18 @@ const Chat = ({ onToggle }) => {
                   </div>
                 ) : (
                   <div
+                    key={msg.id}
+                    id={msg.id}
                     className={`message ${
                       msg.sender === user.id ? 'message--you' : ''
                     }`}
+                    data-seen={!!msg.isSeen}
                   >
                     {msg.content}
                     <span className="message__date">
-                      {getHours(msg.createdAt)}
+                      {getHours(msg.createdAt) + ' '}
+                      {msg.sender === user.id &&
+                        (msg.isSeen ? <RiCheckDoubleLine /> : <RiCheckLine />)}
                     </span>
                   </div>
                 ),

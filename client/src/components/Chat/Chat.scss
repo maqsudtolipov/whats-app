@@ -107,7 +107,7 @@
   position: relative;
   align-self: flex-start;
 
-  min-width: 6rem;
+  min-width: 7rem;
   max-width: 75%;
   padding: 0.8rem 1.2rem 1.2rem 1.2rem;
   margin-left: 2.4rem;
@@ -136,6 +136,16 @@
     position: absolute;
     bottom: 4px;
     right: 1.6rem;
+
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+
+    svg {
+      font-size: 1rem;
+      scale: 1.4;
+      translate: 0 -1px;
+    }
   }
 }
 

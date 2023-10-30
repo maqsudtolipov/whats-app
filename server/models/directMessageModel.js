@@ -25,6 +25,11 @@ const directMessageSchema = new mongoose.Schema(
       type: String,
       default: undefined,
     },
+    // Default false, if seen this key will be removed
+    isSeen: {
+      type: Boolean,
+      default: false,
+    },
     createdAt: {
       type: Date,
       default: Date.now(),

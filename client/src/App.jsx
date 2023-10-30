@@ -16,7 +16,7 @@ import Nav from './components/Nav/Nav.jsx';
 import Settings from './pages/Settings.jsx';
 
 function App() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const user = useSelector((state) => state.user);
   const theme = useSelector((state) => state.theme);

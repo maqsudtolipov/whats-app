@@ -107,6 +107,21 @@ io.on('connection', (device) => {
     io.to(convoId).emit('msgToRoom', dm, con);
   });
 
+  device.on('messageDelivered', async ({ messageId: id }) => {
+    const message = await DirectMessage.findOneAndUpdate(
+      {
+        _id: id,
+        isSeen: false,
+      },
+      {
+        isSeen: true,
+      },
+      {
+        new: true,
+      },
+    );
+  });
+
   device.on('disconnect', () => {
     console.log('🍓 left:', device.id);
     onlineUsers = onlineUsers.filter((user) => user.socketId !== device.id);
