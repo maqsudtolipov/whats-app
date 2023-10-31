@@ -9,7 +9,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedIn, logOut } from './store/thunks/user.js';
 import { socket } from './sockets/socket.js';
-import { joinConversation, newMessage } from './store/reducers/conversation.js';
+import {
+  joinConversation,
+  messageDelivered,
+  newMessage,
+} from './store/reducers/conversation.js';
 import { connectSocket, updateOnlineUsers } from './store/reducers/socket.js';
 import { updateLatestMessage } from './store/reducers/user.js';
 import Nav from './components/Nav/Nav.jsx';
@@ -42,6 +46,10 @@ function App() {
       socket.on('msgToRoom', (data, con) => {
         dispatch(newMessage(data));
         dispatch(updateLatestMessage(con));
+      });
+
+      socket.on('msgDeliverConfirm', (data) => {
+        dispatch(messageDelivered(data));
       });
 
       socket.on('updateOnlineUsers', (onlineUsers) => {

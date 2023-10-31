@@ -37,6 +37,7 @@ const Chat = ({ onToggle }) => {
         if (entry.isIntersecting) {
           socket.emit('messageDelivered', {
             messageId: entry.target.id,
+            conversationId: data.id,
           });
         }
       });

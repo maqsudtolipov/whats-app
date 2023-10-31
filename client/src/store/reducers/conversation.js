@@ -1,5 +1,5 @@
 // This reducer for socket.io but we have variable called socket
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 export const conversationSlice = createSlice({
   name: 'conversation',
@@ -21,8 +21,21 @@ export const conversationSlice = createSlice({
 
       state.messagesByDate[date].push(message);
     },
+    messageDelivered: (state, action) => {
+      const message = action.payload;
+      const date = new Date(message.createdAt).toDateString();
+
+      // if (!state.messagesByDate[date]) state.messagesByDate[date] = [];
+
+      const msgIndex = state.messagesByDate[date].findIndex(
+        (msg) => msg.id === message.id,
+      );
+
+      state.messagesByDate[date][msgIndex] = message;
+    },
   },
 });
 
-export const { joinConversation, newMessage } = conversationSlice.actions;
+export const { joinConversation, newMessage, messageDelivered } =
+  conversationSlice.actions;
 export default conversationSlice.reducer;

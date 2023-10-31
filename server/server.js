@@ -107,8 +107,9 @@ io.on('connection', (device) => {
     io.to(convoId).emit('msgToRoom', dm, con);
   });
 
-  device.on('messageDelivered', async ({ messageId: id }) => {
-    const message = await DirectMessage.findOneAndUpdate(
+  device.on('messageDelivered', async ({ messageId: id, conversationId }) => {
+    console.log(conversationId);
+    const dm = await DirectMessage.findOneAndUpdate(
       {
         _id: id,
         isSeen: false,
@@ -120,6 +121,8 @@ io.on('connection', (device) => {
         new: true,
       },
     );
+
+    io.to(conversationId).emit('msgDeliverConfirm', dm);
   });
 
   device.on('disconnect', () => {
