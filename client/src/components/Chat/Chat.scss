@@ -41,13 +41,12 @@
     }
   }
 
-  &__section {
+  &__messages {
     background-color: #141416;
     scroll-behavior: smooth;
 
     overflow-y: scroll;
     padding: 2.4rem;
-    //height: 100%;
 
     display: flex;
     flex-direction: column;

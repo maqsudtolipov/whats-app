@@ -5,8 +5,12 @@ import {
   RiSendPlane2Fill,
 } from 'react-icons/ri';
 import { socket } from '../../sockets/socket.js';
+import { useSelector } from 'react-redux';
 
 const ChatForm = ({ socketData }) => {
+  const { data } = useSelector((state) => state.conversation);
+  const { data: user } = useSelector((state) => state.user);
+
   const handleForm = (e) => {
     e.preventDefault();
     if (!socketData.connected) return;
