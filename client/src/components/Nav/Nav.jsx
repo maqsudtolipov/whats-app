@@ -15,7 +15,7 @@ const Nav = () => {
       <div className="nav__user-img">
         <img src={user.img} alt="" />
       </div>
-      <div className="nav__links">
+      <ul className="nav__links">
         <Link to="/" className="nav__link">
           <RiChatSmile2Line />
         </Link>
@@ -25,7 +25,7 @@ const Nav = () => {
         <Link to="/settings" className="nav__link">
           <RiSettings4Line />
         </Link>
-      </div>
+      </ul>
     </nav>
   );
 };

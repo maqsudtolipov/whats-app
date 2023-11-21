@@ -6,79 +6,6 @@
   display: flex;
   flex-direction: column;
 
-  &__search {
-    border-bottom: 1px solid #37393c;
-    padding: 2.4rem;
-
-    form {
-      background-color: #26272d;
-      border-radius: 3px;
-
-      padding: 0.8rem 1.2rem;
-
-      display: flex;
-      gap: 0.8rem;
-
-      &:hover {
-        outline: 1px solid #36373f;
-      }
-
-      input {
-        font-size: 1.4rem;
-        line-height: inherit;
-        color: inherit;
-        background-color: inherit;
-        border: 0;
-        border-radius: 3px;
-
-        width: 100%;
-      }
-
-      input:focus {
-        outline: none;
-      }
-    }
-
-    &-users {
-      list-style: none;
-
-      margin-top: 1.6rem;
-
-      display: flex;
-      flex-direction: column;
-    }
-
-    &-user {
-      list-style: none;
-      border-top: 2px solid transparent;
-      border-bottom: 2px solid transparent;
-      border-left: 2px solid transparent;
-      cursor: pointer;
-
-      padding: .8rem;
-
-      display: flex;
-      align-items: center;
-      gap: .8rem;
-
-      img {
-        border-radius: 50rem;
-
-        // Remove this after resizing imgs
-        object-fit: cover;
-
-        width: 4rem;
-        height: 4rem;
-      }
-
-      &:hover {
-        background-image: linear-gradient(to right, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0));
-        border-image: linear-gradient(to right, rgb(168, 85, 247), rgba(168, 85, 247, 0) 50%) 1;
-        cursor: pointer;
-      }
-    }
-  }
-
   &__stories {
     border-bottom: 1px solid #37393c;
 
@@ -125,7 +52,7 @@
     }
   }
 
-  &__chats {
+  &__conversations {
     overflow-y: scroll;
     flex: 1;
     display: flex;

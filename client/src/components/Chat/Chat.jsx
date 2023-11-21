@@ -22,7 +22,7 @@ const getHours = (date) => {
   return `${hoursFixed}:${minutesFixed}`;
 };
 
-const Chat = ({ onToggle }) => {
+const Chat = ({ onDetailsOpen }) => {
   const { data, partner, messagesByDate } = useSelector(
     (state) => state.conversation,
   );
@@ -86,7 +86,10 @@ const Chat = ({ onToggle }) => {
             )}
           </div>
           <RiSearch2Line />
-          <RiMore2Line onClick={() => onToggle(true)} />
+          <RiMore2Line
+            style={{ cursor: 'pointer' }}
+            onClick={() => onDetailsOpen(true)}
+          />
         </div>
       )}
 

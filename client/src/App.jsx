@@ -7,20 +7,16 @@ import Login from './components/Auth/Login.jsx';
 import Signup from './components/Auth/Signup.jsx';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLoggedIn, logOut } from './store/thunks/user.js';
+import { isLoggedIn } from './store/thunks/user.js';
 import { socket } from './sockets/socket.js';
-import {
-  joinConversation,
-  messageDelivered,
-  newMessage,
-} from './store/reducers/conversation.js';
+import { messageDelivered, newMessage } from './store/reducers/conversation.js';
 import { connectSocket, updateOnlineUsers } from './store/reducers/socket.js';
 import { updateLatestMessage } from './store/reducers/user.js';
 import Nav from './components/Nav/Nav.jsx';
 import Settings from './pages/Settings.jsx';
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   const user = useSelector((state) => state.user);
   const theme = useSelector((state) => state.theme);
@@ -73,9 +69,12 @@ function App() {
               {user.auth ? (
                 <div className={`app ${theme.dark ? '' : 'light'}`}>
                   <Nav />
-                  <Sidebar onToggle={setIsOpen} />
-                  <Chat onToggle={setIsOpen} />
-                  <Details isOpen={isOpen} onToggle={setIsOpen} />
+                  <Sidebar />
+                  <Chat onDetailsOpen={setIsDetailsOpen} />
+                  <Details
+                    isDetailsOpen={isDetailsOpen}
+                    onToggle={setIsDetailsOpen}
+                  />
                 </div>
               ) : (
                 <Navigate to="/login" />
