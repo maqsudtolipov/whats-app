@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { socket } from '../../sockets/socket.js';
 import ChatProfile from './ChatProfile.jsx';
+import ChatForm from './ChatForm.jsx';
 
 const getHours = (date) => {
   const hours = new Date(date).getHours();
@@ -48,17 +49,6 @@ const Chat = ({ onDetailsOpen }) => {
     if (messages.length >= 1)
       messages.forEach((msgEl) => observer.observe(msgEl));
   }, [messagesByDate]);
-
-  const formHandler = (e) => {
-    e.preventDefault();
-    if (!socketData.connected) return;
-
-    socket.emit('newMsgToConvo', {
-      content: e.target[0].value,
-      userId: user.id,
-      convoId: data.id,
-    });
-  };
 
   return (
     <div className="chat">
@@ -115,13 +105,7 @@ const Chat = ({ onDetailsOpen }) => {
           ))}
       </section>
 
-      <form className="chat__form" onSubmit={formHandler}>
-        <RiEmotionHappyLine />
-        <RiAttachment2 />
-        <input className="chat__form-input" placeholder="👋🏻 Say hello" />
-        <RiMicLine />
-        <RiSendPlane2Fill />
-      </form>
+      <ChatForm socketData={socketData} />
     </div>
   );
 };
