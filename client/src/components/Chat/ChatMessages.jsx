@@ -2,6 +2,7 @@ import { RiCheckDoubleLine, RiCheckLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { socket } from '../../sockets/socket.js';
+import Message from './Message.jsx';
 
 const getHours = (date) => {
   const hours = new Date(date).getHours();
@@ -49,34 +50,26 @@ const ChatMessages = () => {
             </div>
             {messagesByDate[date].map((msg) =>
               msg.isSticker ? (
-                <div
-                  key={msg.id}
-                  id={msg.id}
-                  className={`message message--sticker ${
-                    msg.sender === user.id ? 'message--you' : ''
-                  }`}
-                >
-                  <img src={msg.stickerUrl} alt="sticker" />
-                  <span className="message__date">
-                    {getHours(msg.createdAt)}
-                  </span>
-                </div>
+                <>
+                  <Message
+                    key={msg.id}
+                    isSticker={true}
+                    stickerUrl={msg.stickerUrl}
+                    isSender={msg.sender === user.id}
+                    isSeen={msg.isSeen}
+                    sentTime={getHours(msg.createdAt)}
+                    data-seen={!!msg.isSeen}
+                  />
+                </>
               ) : (
-                <div
+                <Message
                   key={msg.id}
-                  id={msg.id}
-                  className={`message ${
-                    msg.sender === user.id ? 'message--you' : ''
-                  }`}
+                  content={msg.content}
+                  isSender={msg.sender === user.id}
+                  isSeen={msg.isSeen}
+                  sentTime={getHours(msg.createdAt)}
                   data-seen={!!msg.isSeen}
-                >
-                  {msg.content}
-                  <span className="message__date">
-                    {getHours(msg.createdAt) + ' '}
-                    {msg.sender === user.id &&
-                      (msg.isSeen ? <RiCheckDoubleLine /> : <RiCheckLine />)}
-                  </span>
-                </div>
+                />
               ),
             )}
           </>
