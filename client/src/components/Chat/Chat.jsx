@@ -5,13 +5,12 @@ import {
   RiCheckLine,
   RiEmotionHappyLine,
   RiMicLine,
-  RiMore2Line,
-  RiSearch2Line,
   RiSendPlane2Fill,
 } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { socket } from '../../sockets/socket.js';
+import ChatProfile from './ChatProfile.jsx';
 
 const getHours = (date) => {
   const hours = new Date(date).getHours();
@@ -64,33 +63,11 @@ const Chat = ({ onDetailsOpen }) => {
   return (
     <div className="chat">
       {partner && (
-        <div className="chat__profile">
-          <img
-            // src="https://xsgames.co/randomusers/assets/avatars/male/23.jpg"
-            src={partner.img}
-            alt="Chat group"
-          />
-          <div className="chat__profile-name">
-            <span>{partner.name} </span>
-            {socketData.onlineUsers?.find(
-              (onlineUser) => onlineUser.userId === partner.id,
-            ) ? (
-              <span className="chat__profile-status chat__profile-status--online">
-                Online
-              </span>
-            ) : (
-              <span className="chat__profile-status">
-                Last seen at&nbsp;
-                {getHours(partner.lastSeen)}
-              </span>
-            )}
-          </div>
-          <RiSearch2Line />
-          <RiMore2Line
-            style={{ cursor: 'pointer' }}
-            onClick={() => onDetailsOpen(true)}
-          />
-        </div>
+        <ChatProfile
+          partner={partner}
+          socketData={socketData}
+          onDetailsOpen={onDetailsOpen}
+        />
       )}
 
       <section className="chat__section" ref={chatRef}>

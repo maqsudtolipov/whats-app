@@ -37,7 +37,6 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <Search onJoinConversation={handleJoinConversation} />
-
       <SidebarStories />
 
       {conversations && (
